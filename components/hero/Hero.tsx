@@ -14,7 +14,7 @@ export function Hero() {
       {/* one soft light, placed behind the phone */}
       <div className="absolute right-[2%] top-[14%] -z-10 hidden h-[760px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgba(0,199,190,0.16),transparent)] lg:block" aria-hidden="true" />
 
-      <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-5 pb-14 pt-[88px] sm:px-10 lg:min-h-[100svh] lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14 lg:pb-12 lg:pt-24 xl:gap-24">
+      <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-5 pb-14 pt-[88px] sm:px-10 lg:min-h-[100svh] lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-14 lg:pb-12 lg:pt-24 xl:gap-24">
         <div style={{ transform: 'translate3d(0, calc(var(--hp, 0) * -30px), 0)', opacity: 'calc(1 - var(--hp, 0) * 0.7)' }}>
           <p className="fade-in label mb-5 text-white/55" style={d(100)}>Business platform for merchants in Pakistan</p>
           <h1 id="hero-title" className="text-[clamp(40px,5.2vw,82px)] font-extrabold leading-[0.96] tracking-[-0.055em]">

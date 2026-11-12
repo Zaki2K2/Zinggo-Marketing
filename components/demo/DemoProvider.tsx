@@ -26,6 +26,9 @@ interface Ctrl {
   running: boolean;
   manual: boolean;
   cursor: { target: string; tick: number } | null;
+  /** True once the intro inside the phone has finished (or was skipped). */
+  introDone: boolean;
+  finishIntro: () => void;
   play: () => void;
   pause: () => void;
   replay: () => void;
@@ -55,6 +58,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [manual, setManual] = useState(false);
   const [cursor, setCursor] = useState<{ target: string; tick: number } | null>(null);
   const [presenters, setPresenters] = useState(0);
+  // The demo waits until the Zinggo intro inside the phone has finished (see PhoneIntro).
+  const [introDone, setIntroDone] = useState(false);
   const [touchTick, setTouchTick] = useState(0);
   const [epoch, setEpoch] = useState(0); // bumped by seek/replay so the step effect restarts even if the index is unchanged
   const [tabVisible, setTabVisible] = useState(true);
@@ -68,7 +73,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     return () => document.removeEventListener('visibilitychange', onVis);
   }, []);
 
-  const running = playing && !manual && presenters > 0 && tabVisible;
+  const running = playing && !manual && introDone && presenters > 0 && tabVisible;
 
   useEffect(() => {
     if (!running) { setCursor(null); return; }
@@ -142,6 +147,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(id);
   }, [manual, touchTick, replay]);
 
+  const finishIntro = useCallback(() => setIntroDone(true), []);
+
   const present = useCallback(() => {
     setPresenters((n) => n + 1);
     return () => setPresenters((n) => Math.max(0, n - 1));
@@ -152,9 +159,9 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     stepIndex,
     stepLabel: manual ? 'Your turn. Tap around the app.' : SCRIPT[stepIndex].label,
     group: groupOf(stepIndex),
-    playing, running, manual, cursor,
+    playing, running, manual, cursor, introDone, finishIntro,
     play, pause, replay, seek, touch, present,
-  }), [state, stepIndex, playing, running, manual, cursor, play, pause, replay, seek, touch, present]);
+  }), [state, stepIndex, playing, running, manual, cursor, introDone, finishIntro, play, pause, replay, seek, touch, present]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import type { Tab } from '@/lib/demo/types';
 import { usePresence, useDemo } from './DemoProvider';
+import { PhoneIntro } from './PhoneIntro';
 import { CatalogView, CheckoutView, HomeView, OrdersView, PosView, ProductSheet, ReceiptView, ReportsView } from './screens';
 
 const TABS: { id: Tab; label: string; icon: IconName }[] = [
@@ -36,7 +37,7 @@ const tabOf = (v: string): Tab => (v === 'checkout' || v === 'receipt' ? 'pos' :
  * Interacting with it hands control to the visitor and stops autoplay.
  */
 export function DemoPhone() {
-  const { state, dispatch, cursor, running, touch } = useDemo();
+  const { state, dispatch, cursor, running, touch, introDone } = useDemo();
   const box = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const screen = useRef<HTMLDivElement>(null);
@@ -56,14 +57,14 @@ export function DemoPhone() {
   }, [cursor]);
 
   const view = state.view;
-  const onKey = (e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') touch(); };
+  const onKey = (e: KeyboardEvent) => { if (introDone && (e.key === 'Enter' || e.key === ' ')) touch(); };
 
   return (
     <div ref={box} className="demo-box mx-auto">
       <div
         ref={stage}
         className="demo-stage relative h-[652px] w-[316px] rounded-[50px] bg-gradient-to-b from-[#3a3f50] via-[#1a1d29] to-[#0b0c14] p-[9px] shadow-[7px_3px_0_-1px_#2a2e3c,13px_5px_0_-2px_#181b26,0_60px_100px_-30px_rgba(0,0,0,0.9),0_30px_60px_-30px_rgba(0,199,190,0.35),inset_0_0_0_1.5px_rgba(255,255,255,0.14),inset_0_0_0_4px_rgba(0,0,0,0.5)]"
-        onPointerDownCapture={touch}
+        onPointerDownCapture={introDone ? touch : undefined}
         onKeyDownCapture={onKey}
         role="group"
         aria-label="Interactive Zinggo Merchant demo. Tap or click around the app."
@@ -73,6 +74,8 @@ export function DemoPhone() {
         <span className="absolute -left-[3px] top-36 h-14 w-[3px] rounded-l bg-[#252938]" aria-hidden="true" />
 
         <div className="relative h-full w-full overflow-hidden rounded-[41px] bg-[#F3F6F6] text-[#111716]">
+          <PhoneIntro />
+
           {/* status bar */}
           <div className="pointer-events-none absolute inset-x-0 top-0 z-40 flex h-[38px] items-center justify-between px-7 pt-1 text-[11.5px] font-bold" aria-hidden="true">
             <span className={view === 'home' ? 'text-white' : 'text-[#111716]'}>10:16</span>
