@@ -1,138 +1,104 @@
 'use client';
 
-import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
-import { Icon, IconTile, type IconName } from '@/components/ui/Icon';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import Image from 'next/image';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { PhoneFrame } from '@/components/mockup/PhoneFrame';
+import { InventoryScreen } from '@/components/mockup/screens/InventoryScreen';
+import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
-import { d } from '@/components/mockup/parts';
+import { trialHref } from '@/lib/site';
 
-type Solution = { id: string; label: string; icon: IconName; summary: string; features: string[]; note?: string; preview: ReactNode };
+/**
+ * One continuous showcase, no clicks and no pinning: three business types side by side on Zinggo screens.
+ * Columns drift at different speeds as the section crosses the viewport (--sp, set once per frame), giving depth
+ * while native scrolling stays untouched.
+ */
 
-const Row = ({ a, b, i }: { a: string; b: string; i: number }) => (
-  <div className="pop-in flex items-center justify-between rounded-xl bg-white/10 px-3.5 py-2.5 text-[13px]" style={d(i * 100)}>
-    <span className="font-semibold">{a}</span>
-    <span className="font-extrabold text-brand">{b}</span>
-  </div>
+const shot = (src: string, alt: string): ReactNode => (
+  <PhoneFrame chrome={false} tab="home">
+    <div className="relative h-full w-full">
+      <Image src={src} alt={alt} fill sizes="274px" quality={72} className="object-cover object-top" />
+    </div>
+  </PhoneFrame>
 );
 
-const SOLUTIONS: Solution[] = [
+const COLS: { label: string; title: ReactNode; text: string; tags: string; plan: string; price: string; note?: string; drift: number; node: ReactNode }[] = [
   {
-    id: 'retail', label: 'Retailers', icon: 'store', summary: 'Sales, POS, inventory, purchasing, and customers.',
-    features: ['Barcode scanning at the counter', 'Buy from distributors and wholesalers online', 'Batches and expiry dates', 'Customer credit and daily expenses'],
-    preview: (
-      <div>
-        <div className="relative mb-4 h-20 overflow-hidden rounded-2xl bg-white/10" aria-hidden="true">
-          <div className="absolute inset-x-6 inset-y-4 flex items-stretch gap-[3px]">{[3,1,2,1,3,2,1,2,3,1,2,1,3,1,2].map((w, i) => <span key={i} className="bg-white" style={{ width: w * 2 }} />)}</div>
-          <span className="absolute inset-x-3 top-3 h-0.5 rounded bg-brand shadow-[0_0_14px_#00C7BE] [animation:scan-line_2.4s_ease-in-out_infinite]" />
-        </div>
-        <div className="space-y-2"><Row i={0} a="Basmati Rice 5kg" b="Rs 1,650" /><Row i={1} a="Cooking Oil 1L" b="Rs 540" /><Row i={2} a="Total" b="Rs 2,190" /></div>
-      </div>
-    ),
+    label: 'Retailers',
+    title: <>The counter, <span className="text-brand">connected.</span></>,
+    text: 'Scan, sell and watch stock drop. Reorder from a supplier when something runs low.',
+    tags: 'POS · Barcodes · Batches and expiry · Credit',
+    plan: 'Retailer', price: 'Rs 999', drift: 70,
+    node: shot('/screens/pos.jpg', 'Zinggo POS screen with product search, categories and product cards'),
   },
   {
-    id: 'restaurant', label: 'Restaurants & Cafés', icon: 'utensils', summary: 'Menus, QR ordering, POS, deliveries, and loyalty.',
-    features: ['QR dine-in and takeaway ordering', 'Menus and recipes', 'Delivery rider management', 'Loyalty program and promo codes'],
-    preview: (
-      <div className="grid grid-cols-[96px_1fr] items-center gap-4">
-        <div className="grid grid-cols-5 gap-[3px] rounded-xl bg-white p-2.5" aria-hidden="true">{Array.from({ length: 25 }).map((_, i) => <span key={i} className={`aspect-square rounded-[2px] ${[0,1,2,4,5,6,10,12,14,18,20,22,23,24,8,16].includes(i) ? 'bg-night' : 'bg-white'}`} />)}</div>
-        <div className="space-y-2"><Row i={0} a="Table 4 · QR order" b="Cooking" /><Row i={1} a="Takeaway #T-22" b="Ready" /><Row i={2} a="Delivery #ZG-1042" b="On the way" /></div>
-      </div>
-    ),
+    label: 'Restaurants and cafés',
+    title: <>Table to kitchen to <span className="text-brand">doorstep.</span></>,
+    text: 'QR orders for dine-in and takeaway, a live order queue and delivery riders.',
+    tags: 'QR ordering · Menus and recipes · Delivery · Loyalty',
+    plan: 'Restaurant', price: 'Rs 2,499', drift: 0,
+    node: shot('/screens/home.jpg', 'Zinggo Merchant home screen of a restaurant account with live orders and a Point of Sale shortcut'),
   },
   {
-    id: 'distributor', label: 'Distributors & Wholesalers', icon: 'truck', summary: 'Stock management, customer records, suppliers, and ordering.',
-    features: ['Products, batches and stock levels', 'Suppliers and stock purchases', 'QR ordering and delivery areas', 'Order online from merchants'],
-    preview: (
-      <div className="space-y-3">
-        {[['Cartons in stock', 82], ['Open purchase orders', 46], ['Retail customers served', 64]].map(([l, v], i) => (
-          <div key={l as string}><div className="mb-1 flex justify-between text-[12px] font-semibold text-white/80"><span>{l}</span><span>{v}%</span></div><div className="h-2.5 overflow-hidden rounded-full bg-white/10"><div className="grow-x h-full rounded-full bg-brand" style={{ width: `${v}%`, ...d(i * 140) }} /></div></div>
-        ))}
-        <div className="grid grid-cols-2 gap-2 pt-1"><Row i={3} a="Suppliers" b="12" /><Row i={4} a="Areas" b="8" /></div>
-      </div>
-    ),
-  },
-  {
-    id: 'enterprise', label: 'Growing Enterprises', icon: 'building', summary: 'A platform with the ambition to grow alongside your business.',
-    features: ['Start with the tools you need today', 'Reports that show how the business is moving', 'A connected platform, not scattered tools', 'Talk to us about larger requirements'],
-    note: 'Today’s plans cover one location and one user. If you have larger needs, get in touch and we will tell you honestly what is available.',
-    preview: (
-      <div className="flex h-full min-h-[190px] items-end justify-between gap-3 pb-2" aria-hidden="true">
-        {[['Today', 'Single shop', 36], ['Next', 'More tools', 64], ['Ambition', 'Bigger scale', 92]].map(([a, b, h], i) => (
-          <div key={a as string} className="flex-1 text-center"><div className="grow-y mx-auto w-full max-w-[84px] rounded-t-2xl bg-gradient-to-t from-brand/30 to-brand" style={{ height: `${h}px`, ...d(i * 160) }} /><p className="mt-2 text-[12px] font-extrabold text-white">{a}</p><p className="text-[11px] text-white/60">{b}</p></div>
-        ))}
-      </div>
-    ),
+    label: 'Distributors and wholesalers',
+    title: <>Every order, <span className="text-brand">on route.</span></>,
+    text: 'Take orders from merchants, keep stock honest and organise deliveries by area.',
+    tags: 'Merchant ordering · Inventory · Delivery areas',
+    plan: 'Distributor / Wholesaler', price: 'Rs 4,999', note: 'Stock screen shown is a demo recreation.', drift: -70,
+    node: <PhoneFrame tab="catalog"><InventoryScreen /></PhoneFrame>,
   },
 ];
 
 export function Solutions() {
-  const [idx, setIdx] = useState(0);
-  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
-  const cur = SOLUTIONS[idx];
+  const ref = useRef<HTMLElement>(null);
 
-  const onKey = (e: KeyboardEvent, i: number) => {
-    const n = SOLUTIONS.length;
-    let next = i;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % n;
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + n) % n;
-    else if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = n - 1;
-    else return;
-    e.preventDefault();
-    setIdx(next);
-    tabs.current[next]?.focus();
-  };
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (window.innerHeight - r.top) / (window.innerHeight + r.height)));
+      el.style.setProperty('--sp', p.toFixed(3));
+    };
+    const on = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', on, { passive: true });
+    window.addEventListener('resize', on);
+    return () => {
+      window.removeEventListener('scroll', on);
+      window.removeEventListener('resize', on);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
-    <section id="solutions" aria-labelledby="solutions-title" className="on-light bg-brand-soft py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHeading id="solutions-title" eyebrow="Built for your business" title="From Local Shops To Bigger Ambitions.">
-          One connected platform designed around different ways of doing business.
-        </SectionHeading>
-
-        <Reveal className="mt-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div role="tablist" aria-label="Business types" aria-orientation="vertical" className="flex gap-3 overflow-x-auto pb-1 no-scrollbar lg:flex-col lg:overflow-visible">
-            {SOLUTIONS.map((s, i) => {
-              const on = i === idx;
-              return (
-                <button
-                  key={s.id}
-                  ref={(el) => { tabs.current[i] = el; }}
-                  role="tab"
-                  id={`tab-${s.id}`}
-                  aria-selected={on}
-                  aria-controls="solution-panel"
-                  tabIndex={on ? 0 : -1}
-                  onClick={() => setIdx(i)}
-                  onKeyDown={(e) => onKey(e, i)}
-                  className={`flex min-w-[240px] flex-1 items-center gap-4 rounded-[24px] border p-4 text-left transition-[transform,background-color,border-color,box-shadow] duration-300 [transition-timing-function:var(--ease-panel)] active:scale-[0.98] lg:min-w-0 ${on ? 'border-transparent bg-white shadow-lift' : 'border-brand-ink/10 bg-white/50 hover:bg-white/80'}`}
-                >
-                  <IconTile name={s.icon} tone={on ? 'teal' : 'light'} size={48} />
-                  <span>
-                    <span className="block text-[17px] font-extrabold tracking-tight">{s.label}</span>
-                    <span className="mt-0.5 block text-[13.5px] leading-snug text-muted">{s.summary}</span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div id="solution-panel" role="tabpanel" aria-labelledby={`tab-${cur.id}`} tabIndex={0} className="grid min-h-[520px] grid-rows-[auto_1fr] overflow-hidden rounded-card bg-night text-white shadow-lift sm:min-h-[480px]">
-            <div key={cur.id} className="screen-enter border-b border-white/10 bg-gradient-to-br from-deep to-night p-6 sm:p-8">
-              <p className="t-eyebrow mb-4 text-brand">{cur.label}</p>
-              <div className="min-h-[190px]">{cur.preview}</div>
-            </div>
-            <div key={`${cur.id}-f`} className="screen-enter p-6 sm:p-8">
-              <p className="t-eyebrow mb-4 text-white/50">What you get</p>
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {cur.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[15px] leading-snug text-white/90"><span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand text-deep"><Icon name="check" size={12} strokeWidth={3.4} /></span>{f}</li>
-                ))}
-              </ul>
-              {cur.note && <p className="mt-5 rounded-2xl bg-white/5 p-4 text-[13.5px] leading-relaxed text-white/70">{cur.note}</p>}
-            </div>
-          </div>
+    <section ref={ref} id="solutions" aria-labelledby="solutions-title" className="relative -mt-10 scroll-mt-20 rounded-t-[40px] bg-deep pb-28 pt-24 text-white sm:pb-36 sm:pt-32">
+      <div className="mx-auto max-w-[1280px] px-5 sm:px-10">
+        <Reveal className="max-w-5xl">
+          <p className="t-eyebrow text-brand">Built for your business</p>
+          <h2 id="solutions-title" className="mt-4 text-[clamp(38px,5.6vw,88px)] font-extrabold leading-[0.95] tracking-[-0.055em]">One platform.<br />Three kinds of business.</h2>
         </Reveal>
+
+        <div className="mt-16 grid gap-20 lg:mt-24 lg:grid-cols-3 lg:gap-8 xl:gap-12">
+          {COLS.map((c, i) => (
+            <Reveal key={c.label} delay={i * 90}>
+              <article className="flex flex-col items-center text-center lg:items-start lg:text-left" style={{ transform: `translate3d(0, calc((0.5 - var(--sp, 0.5)) * ${c.drift}px), 0)` }}>
+                <div className="origin-top scale-[0.9] max-lg:-mb-[60px] lg:scale-[0.88] lg:-mb-[72px] lg:self-center">{c.node}</div>
+                <p className="label mt-8 text-brand">{c.label}</p>
+                <h3 className="mt-3 max-w-[16ch] text-[clamp(28px,2.6vw,40px)] font-extrabold leading-[1] tracking-[-0.045em]">{c.title}</h3>
+                <p className="mt-4 max-w-[34ch] text-[16px] leading-relaxed text-white/65">{c.text}</p>
+                <p className="label mt-4 text-white/40">{c.tags}</p>
+                {c.note && <p className="mt-2 text-[12px] text-white/40">{c.note}</p>}
+                <a href={trialHref(c.plan)} target="_blank" rel="noopener noreferrer" aria-label={`Start Free Trial, ${c.plan} plan, ${c.price} per month`} className="btn btn-primary btn-sm mt-6 max-w-full">
+                  Start Free Trial · {c.price}/mo <Icon name="arrow" size={16} strokeWidth={2.4} />
+                </a>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

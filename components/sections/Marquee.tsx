@@ -31,6 +31,9 @@ export function Marquee() {
         <Row words={ROW_A} dir="l" />
         <Row words={ROW_B} dir="r" />
       </div>
+      <Reveal className="mx-auto mt-14 max-w-7xl px-5 sm:px-8">
+        <p className="max-w-xl border-t border-ink/15 pt-6 text-[15px] leading-relaxed text-muted">Payments are recorded, not processed. Zinggo notes cash, Easypaisa, JazzCash and bank payment references against each sale. It is not a bank, wallet or payment gateway.</p>
+      </Reveal>
       <ul className="sr-only">{[...ROW_A, ...ROW_B].map((w) => <li key={w}>{w}</li>)}</ul>
     </section>
   );

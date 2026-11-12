@@ -2,7 +2,7 @@ import { ScreenHeader, d } from '../parts';
 
 const PAY = [['Cash', 38], ['Easypaisa', 34], ['JazzCash', 18], ['Bank', 10]] as const;
 
-/** Demo reports screen (illustrative data). Shows the post-sale totals. */
+/** Demo reports screen (illustrative data), used in the stacked feature cards. */
 export function ReportsScreen() {
   return (
     <div className="relative h-full bg-[#F3F6F6]">

@@ -63,21 +63,3 @@ export function Icon({ name, size = 20, strokeWidth = 1.8, ...rest }: { name: Ic
     </svg>
   );
 }
-
-/** Dimensional icon: layered tile with depth, highlight and offset shadow plate. */
-export function IconTile({ name, tone = 'teal', size = 56 }: { name: IconName; tone?: 'teal' | 'dark' | 'light' | 'amber'; size?: number }) {
-  const tones = {
-    teal: 'bg-gradient-to-br from-[#3ff0e6] to-[#00a89f] text-deep shadow-[0_10px_18px_-8px_rgb(0_150_143/0.7),inset_0_1.5px_0_rgb(255_255_255/0.55)]',
-    dark: 'bg-gradient-to-br from-[#2a2f45] to-[#0a081b] text-brand shadow-[0_10px_18px_-8px_rgb(10_8_27/0.7),inset_0_1.5px_0_rgb(255_255_255/0.2)]',
-    light: 'bg-gradient-to-br from-white to-[#dff7f5] text-brand-ink shadow-[0_10px_18px_-10px_rgb(7_27_27/0.35),inset_0_1.5px_0_#fff]',
-    amber: 'bg-gradient-to-br from-[#ffe98a] to-[#f5be1f] text-deep shadow-[0_10px_18px_-8px_rgb(190_140_0/0.6),inset_0_1.5px_0_rgb(255_255_255/0.6)]',
-  } as const;
-  return (
-    <span className="relative inline-block" style={{ width: size, height: size }} aria-hidden="true">
-      <span className="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-[18px] bg-deep/10" />
-      <span className={`relative grid h-full w-full place-items-center rounded-[18px] ${tones[tone]}`}>
-        <Icon name={name} size={Math.round(size * 0.46)} strokeWidth={2} />
-      </span>
-    </span>
-  );
-}

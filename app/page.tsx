@@ -4,17 +4,16 @@ import { Footer } from '@/components/layout/Footer';
 import { MusicToggle } from '@/components/layout/MusicToggle';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { Hero } from '@/components/hero/Hero';
-import { Business } from '@/components/sections/Business';
+import { DemoProvider } from '@/components/demo/DemoProvider';
 import { Marquee } from '@/components/sections/Marquee';
 import { Pricing } from '@/components/sections/Pricing';
 import { FinalCta } from '@/components/sections/FinalCta';
 import { SITE } from '@/lib/site';
 
 // Code-split the interactive below-the-fold sections.
-const SolutionsStack = dynamic(() => import('@/components/sections/SolutionsStack').then((m) => m.SolutionsStack));
-const StoryScene = dynamic(() => import('@/components/story/StoryScene').then((m) => m.StoryScene));
-const TrustEditorial = dynamic(() => import('@/components/sections/TrustEditorial').then((m) => m.TrustEditorial));
-const Community = dynamic(() => import('@/components/sections/Community').then((m) => m.Community));
+const Solutions = dynamic(() => import('@/components/sections/Solutions').then((m) => m.Solutions));
+const StackedCards = dynamic(() => import('@/components/sections/StackedCards').then((m) => m.StackedCards));
+const OpsBoard = dynamic(() => import('@/components/sections/OpsBoard').then((m) => m.OpsBoard));
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -39,18 +38,17 @@ export default function Home() {
       <ScrollProgress />
       <Navbar />
       <MusicToggle />
+      <DemoProvider>
       <main id="main">
         <Hero />
-        <StoryScene />
-        <span id="solutions" className="block scroll-mt-20" />
-        <SolutionsStack />
-        <Business />
+        <StackedCards />
+        <OpsBoard />
+        <Solutions />
         <Marquee />
-        <TrustEditorial />
-        <Community />
         <Pricing />
         <FinalCta />
       </main>
+      </DemoProvider>
       <Footer />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>

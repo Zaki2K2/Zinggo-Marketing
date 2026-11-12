@@ -1,6 +1,6 @@
 # Zinggo marketing website
 
-Single-page marketing site: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4. No animation libraries; all motion is CSS plus React state.
+Single-page marketing site (hero, workflow story, business solutions, features/value, pricing, closing CTA): Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4. No animation libraries; all motion is CSS plus React state.
 
 ## Setup
 
@@ -23,9 +23,12 @@ npm run lint       # type-check (tsc --noEmit)
 | --- | --- |
 | Design tokens (colours, radii, easing), keyframes, reduced-motion rules | `app/globals.css` |
 | Contact details, nav, trial link, legal links | `lib/site.ts` |
-| Hero demo script (steps, timings, captions) | `components/mockup/HeroMockup.tsx` |
-| Hero screens | `components/mockup/screens/*` |
-| Feature demos | `components/demos/*` |
+| Demo data, state machine and autoplay script | `lib/demo/*` |
+| Demo engine (provider, autoplay, manual takeover) | `components/demo/DemoProvider.tsx` |
+| Interactive phone and its screens | `components/demo/DemoPhone.tsx`, `components/demo/screens.tsx` |
+| Hero (headline, tracker, controls) | `components/hero/*` |
+| Connected operations board (reads the same demo state) | `components/sections/OpsBoard.tsx` |
+| Business types showcase | `components/sections/Solutions.tsx` |
 | Plans and prices (from the brochures) | `components/sections/Pricing.tsx` |
 
 ### Placeholders you must replace with real URLs
@@ -33,6 +36,10 @@ npm run lint       # type-check (tsc --noEmit)
 - **Sign In** scrolls to the final section, which says to sign in from the Merchant app. Point it to a web sign-in URL if one exists.
 - **Privacy Policy / Terms** open a pre-filled email request. Set `url` in `LEGAL_LINKS` when pages exist.
 - No app-store links are included because the URLs were not provided.
+
+## The live demo
+
+A self-contained simulation: typed data, a reducer-based transaction state machine (no overselling, no empty checkout, no sale without a payment method) and a deterministic script. Nothing is sent anywhere and no real merchant or customer data is used. Autoplay pauses on the first touch and never resumes by itself; Replay or Play restarts from a clean state.
 
 ## Visual QA harness
 
@@ -43,7 +50,7 @@ Uses the Microsoft Edge already installed on Windows (no browser download) throu
 NEXT_DIST_DIR=.next-shot npx next build
 NEXT_DIST_DIR=.next-shot npx next start -p 3222
 npm run qa:shots      # screenshots at 1920/1440/1280/768/390/375, flags horizontal overflow and console errors
-npm run qa:interact   # keyboard, reverse scroll, mobile menu and vote API checks
+npm run qa:interact   # keyboard, reverse scroll, scroll performance and mobile menu checks
 ```
 Set `ONLY=desktop1440,mobile390` to limit viewports and `EDGE_PATH` to use another Chromium.
 

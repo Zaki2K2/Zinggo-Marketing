@@ -1,6 +1,6 @@
 import { ScreenHeader, d } from '../parts';
 
-/** Demo customer-credit screen (illustrative data). */
+/** Demo customer-credit screen (illustrative data), used in the stacked feature cards. */
 export function CreditScreen() {
   return (
     <div className="relative h-full bg-[#F3F6F6]">

@@ -99,14 +99,14 @@ export function StackedCards() {
   const c = CARDS[active];
 
   return (
-    <section id="features" aria-labelledby="stack-title" className="bg-night text-white">
-      <div ref={wrap} className="relative" style={{ height: `${N * 70 + 120}vh` }}>
+    <section id="features" aria-labelledby="stack-title" className="relative bg-night text-white">
+      <div ref={wrap} className="relative" style={{ height: `${N * 62 + 100}vh` }}>
         <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden px-5 pt-20 sm:px-8">
           <div className="mx-auto grid w-full max-w-7xl items-center gap-4 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
             <div>
               <p className="t-eyebrow text-brand">Powerful features</p>
               <h2 id="stack-title" className="sr-only">Zinggo features: point of sale, inventory, orders, customer credit and reports</h2>
-              <div key={active} className="screen-enter mt-3" aria-live="polite">
+              <div key={active} className="view-in mt-3" aria-live="polite">
                 <p className="text-[13px] font-bold text-white/50">0{active + 1} / 0{N} · {c.label}</p>
                 <p className="mt-2 text-[clamp(30px,4.6vw,66px)] font-extrabold leading-[1] tracking-[-0.04em]">{c.title}</p>
                 <p className="t-body mt-3 max-w-md text-white/65">{c.text}</p>

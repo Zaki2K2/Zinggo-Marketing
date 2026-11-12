@@ -11,20 +11,16 @@ const only = process.env.ONLY ? process.env.ONLY.split(',') : Object.keys(VPS);
 // [name, selector, fraction through the section's scroll range]
 const STOPS = [
   ['01-hero', '#top', 0],
-  ['02-hero-scrolled', '#top', 0.35],
-  ['03-solutions-a', 'section[aria-labelledby="solutions-stack-title"]', 0.05],
-  ['04-solutions-b', 'section[aria-labelledby="solutions-stack-title"]', 0.5],
-  ['05-solutions-c', 'section[aria-labelledby="solutions-stack-title"]', 0.95],
-  ['06-story-a', '#why-zinggo', 0.08],
-  ['07-story-b', '#why-zinggo', 0.4],
-  ['08-story-c', '#why-zinggo', 0.9],
-  ['09-solutions', '#solutions', 0],
-  ['10-restaurant', '#restaurant-title', 0],
-  ['11-box', '#box', 0],
-  ['12-trust', '#trust', 0],
-  ['13-community', '#community', 0],
-  ['14-pricing', '#pricing', 0],
-  ['15-final', '#get-started', 0],
+  ['02-hero-scrolled', '#top', 0.4],
+  ['03-stack-a', '#features', 0.05],
+  ['03-stack-b', '#features', 0.5],
+  ['03-stack-c', '#features', 0.95],
+  ['03-ops', '#why-zinggo', 0],
+  ['04-ops-mid', '#why-zinggo', 0.45],
+  ['05-solutions', '#solutions', 0],
+  ['06-box', '#box', 0],
+  ['07-pricing', '#pricing', 0],
+  ['08-final', '#get-started', 0],
 ];
 
 mkdirSync(out, { recursive: true });
@@ -39,7 +35,7 @@ for (const name of only) {
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await page.goto(base, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(2200);
+  await page.waitForTimeout(3200);
 
   for (const [label, sel, frac] of STOPS) {
     const y = await page.evaluate(([s, f]) => {
