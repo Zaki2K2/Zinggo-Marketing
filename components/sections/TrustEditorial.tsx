@@ -25,7 +25,7 @@ export function TrustEditorial() {
   }, []);
 
   return (
-    <section id="trust" aria-labelledby="trust-title" className="bg-deep py-24 text-white sm:py-36">
+    <section id="trust" aria-labelledby="trust-title" className="relative -mt-10 rounded-t-[40px] bg-deep py-24 text-white sm:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal className="grid gap-6 lg:grid-cols-[1fr_0.7fr] lg:items-end">
           <div>

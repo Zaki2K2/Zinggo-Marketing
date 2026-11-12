@@ -5,14 +5,14 @@ import { DistributorScene, RestaurantScene, RetailScene } from '@/components/sto
 import { trialHref } from '@/lib/site';
 
 const Cta = ({ plan, price, dark }: { plan: string; price: string; dark?: boolean }) => (
-  <a href={trialHref(plan)} target="_blank" rel="noopener noreferrer" className={`btn mt-8 ${dark ? 'btn-primary' : 'btn-dark'}`}>
-    Start Free Trial <span className="font-medium opacity-70">· {plan} · {price}/mo</span> <Icon name="arrow" size={18} strokeWidth={2.4} />
+  <a href={trialHref(plan)} target="_blank" rel="noopener noreferrer" aria-label={`Start Free Trial, ${plan} plan, ${price} per month`} className={`btn mt-8 max-w-full ${dark ? 'btn-primary' : 'btn-dark'}`}>
+    Start Free Trial <span className="font-medium opacity-70">· {price}/mo</span> <Icon name="arrow" size={18} strokeWidth={2.4} />
   </a>
 );
 
 export function Business() {
   return (
-    <div id="solutions">
+    <div className="lg:hidden">
       {/* 01 Retail — light, text left, scene right */}
       <section aria-labelledby="retail-title" className="on-light bg-white py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">

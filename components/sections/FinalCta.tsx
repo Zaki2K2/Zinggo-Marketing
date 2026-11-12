@@ -1,30 +1,39 @@
 import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
-import { d } from '@/components/mockup/parts';
 import { trialHref } from '@/lib/site';
 
-const FLOATS = [
-  { cls: 'left-[4%] top-[14%] hidden md:flex', text: 'New Order Received!', sub: '#ZG-1042 · Rs 1,850', icon: 'bell' as const, delay: 0 },
-  { cls: 'right-[5%] top-[20%] hidden md:flex', text: 'Sale Completed!', sub: 'Invoice generated', icon: 'check' as const, delay: 900 },
-  { cls: 'left-[9%] bottom-[12%] hidden lg:flex', text: 'Inventory updated', sub: 'Stock synced', icon: 'box' as const, delay: 1800 },
-  { cls: 'right-[8%] bottom-[14%] hidden lg:flex', text: 'Rs 26,700', sub: 'Today’s sales', icon: 'trend' as const, delay: 2600 },
-];
+const WORDS = ['Order', 'Sale', 'Stock', 'Report'];
+
+function Band({ dir }: { dir: 'l' | 'r' }) {
+  const loop = [...WORDS, ...WORDS, ...WORDS, ...WORDS];
+  return (
+    <div className="overflow-hidden" aria-hidden="true">
+      <div className={dir === 'l' ? 'marquee-l' : 'marquee-r'} style={{ animationDuration: '90s' }}>
+        {loop.map((w, i) => (
+          <span key={i} className="mx-5 whitespace-nowrap text-[clamp(90px,15vw,230px)] font-extrabold leading-[0.95] tracking-[-0.06em] text-deep/[0.065]">
+            {w}<span className="mx-5 inline-block h-5 w-5 rounded-full bg-deep/[0.065] align-middle" />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function FinalCta() {
   return (
-    <section id="get-started" aria-labelledby="cta-title" className="on-light relative isolate overflow-hidden bg-brand py-28 text-deep sm:py-36">
-      {FLOATS.map((f) => (
-        <div key={f.text} aria-hidden="true" className={`float-y absolute -z-0 items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-[0_24px_40px_-20px_rgba(7,27,27,0.5)] ${f.cls}`} style={d(f.delay)}>
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-deep text-brand"><Icon name={f.icon} size={18} /></span>
-          <span><span className="block text-[13px] font-extrabold">{f.text}</span><span className="block text-[11.5px] text-deep/70">{f.sub}</span></span>
-        </div>
-      ))}
+    <section id="get-started" aria-labelledby="cta-title" className="on-light relative isolate -mt-10 overflow-hidden rounded-t-[40px] bg-brand py-28 text-deep sm:py-40">
+      {/* the workflow, as giant quiet type */}
+      <div className="absolute inset-0 -z-10 flex flex-col justify-center gap-2" aria-hidden="true">
+        <Band dir="l" />
+        <Band dir="r" />
+      </div>
 
-      <Reveal className="relative z-10 mx-auto max-w-3xl px-5 text-center">
-        <h2 id="cta-title" className="t-section">Your Business. Your Future. Your Zinggo.</h2>
-        <p className="t-body mx-auto mt-6 max-w-xl text-deep/80">Sell smarter, manage better, and take your business forward with one connected platform.</p>
-        <a href={trialHref()} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-10 px-9 py-5 text-[17px]">Start Free Trial <Icon name="arrow" size={20} strokeWidth={2.4} /></a>
-        <p className="mt-6 text-[14px] font-medium text-deep/80">Already a merchant? Sign in from the Zinggo Merchant app on your phone.</p>
+      <Reveal className="relative z-10 mx-auto max-w-4xl px-5 text-center">
+        <p className="t-eyebrow text-deep/70">Ready when you are</p>
+        <h2 id="cta-title" className="mt-5 text-[clamp(40px,6.4vw,104px)] font-extrabold leading-[0.94] tracking-[-0.055em]">Your business.<br />Your future.<br />Your Zinggo.</h2>
+        <p className="t-body mx-auto mt-7 max-w-md text-deep/80">Sell smarter, manage better, and take your business forward with one connected platform.</p>
+        <a href={trialHref()} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-10 px-10 py-5 text-[17px]">Start Free Trial <Icon name="arrow" size={20} strokeWidth={2.4} /></a>
+        <p className="mt-6 text-[14px] font-medium text-deep/75">Already a merchant? Sign in from the Zinggo Merchant app on your phone.</p>
       </Reveal>
     </section>
   );

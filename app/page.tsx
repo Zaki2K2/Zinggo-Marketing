@@ -11,7 +11,7 @@ import { FinalCta } from '@/components/sections/FinalCta';
 import { SITE } from '@/lib/site';
 
 // Code-split the interactive below-the-fold sections.
-const StackedCards = dynamic(() => import('@/components/sections/StackedCards').then((m) => m.StackedCards));
+const SolutionsStack = dynamic(() => import('@/components/sections/SolutionsStack').then((m) => m.SolutionsStack));
 const StoryScene = dynamic(() => import('@/components/story/StoryScene').then((m) => m.StoryScene));
 const TrustEditorial = dynamic(() => import('@/components/sections/TrustEditorial').then((m) => m.TrustEditorial));
 const Community = dynamic(() => import('@/components/sections/Community').then((m) => m.Community));
@@ -41,8 +41,9 @@ export default function Home() {
       <MusicToggle />
       <main id="main">
         <Hero />
-        <StackedCards />
         <StoryScene />
+        <span id="solutions" className="block scroll-mt-20" />
+        <SolutionsStack />
         <Business />
         <Marquee />
         <TrustEditorial />

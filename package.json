@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "qa:shots": "node scripts/shot.mjs http://localhost:3222 shots/latest",
+    "qa:interact": "node scripts/probe.mjs http://localhost:3222 shots/interact"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.5",
@@ -19,6 +21,7 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "playwright-core": "^1.65.0",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.8.0"
   }

@@ -6,7 +6,7 @@ const PRODUCT = NAV_LINKS.filter((l) => ['Why Zinggo', 'Solutions', 'Features', 
 
 export function Footer() {
   return (
-    <footer className="bg-night text-white" aria-label="Site footer">
+    <footer className="relative -mt-10 rounded-t-[40px] bg-night text-white" aria-label="Site footer">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Logo />

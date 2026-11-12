@@ -24,7 +24,7 @@ const N = STEPS.length;
 
 function Side({ show, side, title, children, y }: { show: boolean; side: 'l' | 'r'; title: string; children: ReactNode; y: string }) {
   return (
-    <aside aria-hidden="true" className={`absolute hidden w-[190px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] transition-[opacity,transform] duration-700 [transition-timing-function:var(--ease-panel)] xl:block ${side === 'l' ? 'left-0' : 'right-0'} ${show ? 'translate-x-0 opacity-100' : side === 'l' ? '-translate-x-8 opacity-0' : 'translate-x-8 opacity-0'}`} style={{ top: y }}>
+    <aside aria-hidden="true" className={`absolute hidden w-[164px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] transition-[opacity,transform] duration-700 [transition-timing-function:var(--ease-panel)] xl:block ${side === 'l' ? 'left-0' : 'right-0'} ${show ? 'translate-x-0 opacity-100' : side === 'l' ? '-translate-x-8 opacity-0' : 'translate-x-8 opacity-0'}`} style={{ top: y }}>
       <p className="text-[11px] font-bold text-muted">{title}</p>
       {children}
     </aside>
@@ -62,7 +62,7 @@ export function StoryScene() {
   };
 
   return (
-    <section id="why-zinggo" aria-labelledby="story-title" className="on-light bg-paper">
+    <section id="why-zinggo" aria-labelledby="story-title" className="on-light relative -mt-10 rounded-t-[40px] bg-paper">
       <div ref={wrap} className="relative" style={{ height: `${N * 85 + 115}vh` }}>
         <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden px-5 pt-20 sm:px-8">
           <div className="mx-auto grid w-full max-w-7xl items-center gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">

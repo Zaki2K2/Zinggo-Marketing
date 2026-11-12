@@ -22,7 +22,7 @@ function Row({ words, dir }: { words: string[]; dir: 'l' | 'r' }) {
 
 export function Marquee() {
   return (
-    <section id="box" aria-labelledby="box-title" className="on-light marquee overflow-hidden bg-white py-24 sm:py-32">
+    <section id="box" aria-labelledby="box-title" className="on-light marquee relative -mt-10 overflow-hidden rounded-t-[40px] bg-white py-24 sm:py-32">
       <Reveal className="mx-auto mb-14 max-w-7xl px-5 sm:px-8">
         <p className="t-eyebrow text-brand-ink">Everything in the box</p>
         <h2 id="box-title" className="t-section mt-4 max-w-3xl">The small things that run a business.</h2>

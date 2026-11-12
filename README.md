@@ -34,6 +34,19 @@ npm run lint       # type-check (tsc --noEmit)
 - **Privacy Policy / Terms** open a pre-filled email request. Set `url` in `LEGAL_LINKS` when pages exist.
 - No app-store links are included because the URLs were not provided.
 
+## Visual QA harness
+
+Uses the Microsoft Edge already installed on Windows (no browser download) through `playwright-core`.
+
+```bash
+# build to a separate folder so a running `next dev` is not disturbed
+NEXT_DIST_DIR=.next-shot npx next build
+NEXT_DIST_DIR=.next-shot npx next start -p 3222
+npm run qa:shots      # screenshots at 1920/1440/1280/768/390/375, flags horizontal overflow and console errors
+npm run qa:interact   # keyboard, reverse scroll, mobile menu and vote API checks
+```
+Set `ONLY=desktop1440,mobile390` to limit viewports and `EDGE_PATH` to use another Chromium.
+
 ## QA checklist
 
 1. **Lighthouse**: build and start, then Chrome DevTools > Lighthouse (mobile) on `http://localhost:3000`. Check all four categories.

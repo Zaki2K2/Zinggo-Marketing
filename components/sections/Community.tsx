@@ -57,7 +57,7 @@ export function Community() {
   const count = votes?.[s.id];
 
   return (
-    <section id="community" aria-labelledby="community-title" className="on-light bg-white py-24 sm:py-32">
+    <section id="community" aria-labelledby="community-title" className="on-light relative -mt-10 rounded-t-[40px] bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading id="community-title" eyebrow="The Zinggo community" title="Grow Together. Succeed Together.">
           Celebrate the people building businesses, creating opportunities, and moving commerce forward.
