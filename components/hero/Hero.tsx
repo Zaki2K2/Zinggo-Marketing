@@ -1,8 +1,10 @@
 import { HeroDemo } from './HeroDemo';
 import { HeroParallax } from './HeroParallax';
 import { Icon } from '@/components/ui/Icon';
+import { PlayStoreButton } from '@/components/ui/PlayStoreButton';
 import { d } from '@/components/mockup/parts';
 import { trialHref } from '@/lib/site';
+import { FROM_PRICE, YEARLY_DISCOUNT } from '@/lib/plans';
 
 /**
  * Hero: headline and CTA on the left, the live interactive Zinggo app on the right.
@@ -27,9 +29,12 @@ export function Hero() {
             <a href={trialHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full px-9 sm:w-auto">
               Start Free Trial <Icon name="arrow" size={18} strokeWidth={2.4} />
             </a>
-            <a href="#why-zinggo" className="btn btn-ghost w-full sm:w-auto">Explore Zinggo</a>
+            <div className="flex gap-3">
+              <a href="#why-zinggo" className="btn btn-ghost flex-1 sm:flex-none">Explore Zinggo</a>
+              <PlayStoreButton className="flex-1 sm:flex-none" />
+            </div>
           </div>
-          <p className="fade-in label mt-5 hidden text-aqua/55 sm:block" style={d(750)}>From Rs 999/mo · free trial · T&amp;C apply</p>
+          <p className="fade-in label mt-5 hidden text-aqua/55 sm:block" style={d(750)}>From ${FROM_PRICE}/mo · yearly {YEARLY_DISCOUNT}% off · free trial · T&amp;C apply</p>
 
         </div>
 

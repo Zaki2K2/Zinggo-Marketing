@@ -9,6 +9,8 @@ export const SITE = {
   whatsapp: 'https://wa.me/923075336334',
   /** Merchant sign-up / login page that every Start Free Trial button opens. */
   trialUrl: 'https://merchants.zinggo.app/login/merchant',
+  /** Zinggo Merchant app on Google Play. */
+  playStoreUrl: 'https://play.google.com/store/apps/details?id=merchant.zinggo.app',
 } as const;
 
 /** Start Free Trial destination: the merchant login page. `plan` is accepted for call-site clarity but the page is the same for every plan. */

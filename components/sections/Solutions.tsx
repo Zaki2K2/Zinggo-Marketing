@@ -7,6 +7,7 @@ import { InventoryScreen } from '@/components/mockup/screens/InventoryScreen';
 import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { trialHref } from '@/lib/site';
+import { DISTRIBUTOR, RESTAURANT, RETAILER, usd } from '@/lib/plans';
 
 /**
  * One continuous showcase, no clicks and no pinning: three business types side by side on Zinggo screens.
@@ -28,7 +29,7 @@ const COLS: { label: string; title: ReactNode; text: string; tags: string; plan:
     title: <>The counter, <span className="text-sun">connected.</span></>,
     text: 'Scan, sell and watch stock drop. Reorder from a supplier when something runs low.',
     tags: 'POS · Barcodes · Batches and expiry · Credit',
-    plan: 'Retailer', price: 'Rs 999', drift: 70,
+    plan: RETAILER.name, price: usd(RETAILER.monthly), drift: 70,
     node: shot('/screens/pos.jpg', 'Zinggo POS screen with product search, categories and product cards'),
   },
   {
@@ -36,15 +37,15 @@ const COLS: { label: string; title: ReactNode; text: string; tags: string; plan:
     title: <>Table to kitchen to <span className="text-sun">doorstep.</span></>,
     text: 'QR orders for dine-in and takeaway, a live order queue and delivery riders.',
     tags: 'QR ordering · Menus and recipes · Delivery · Loyalty',
-    plan: 'Restaurant', price: 'Rs 2,499', drift: 0,
+    plan: RESTAURANT.name, price: usd(RESTAURANT.monthly), drift: 0,
     node: shot('/screens/home.jpg', 'Zinggo Merchant home screen of a restaurant account with live orders and a Point of Sale shortcut'),
   },
   {
-    label: 'Distributors and wholesalers',
+    label: 'Distributors, wholesalers and manufacturers',
     title: <>Every order, <span className="text-sun">on route.</span></>,
     text: 'Take orders from merchants, keep stock honest and organise deliveries by area.',
     tags: 'Merchant ordering · Inventory · Delivery areas',
-    plan: 'Distributor / Wholesaler', price: 'Rs 4,999', note: 'Stock screen shown is a demo recreation.', drift: -70,
+    plan: DISTRIBUTOR.name, price: usd(DISTRIBUTOR.monthly), note: 'Stock screen shown is a demo recreation.', drift: -70,
     node: <PhoneFrame tab="catalog"><InventoryScreen /></PhoneFrame>,
   },
 ];

@@ -8,6 +8,7 @@ import { Marquee } from '@/components/sections/Marquee';
 import { Pricing } from '@/components/sections/Pricing';
 import { FinalCta } from '@/components/sections/FinalCta';
 import { SITE } from '@/lib/site';
+import { PLANS } from '@/lib/plans';
 
 // Code-split the interactive below-the-fold sections.
 const Solutions = dynamic(() => import('@/components/sections/Solutions').then((m) => m.Solutions));
@@ -22,9 +23,7 @@ const jsonLd = {
   operatingSystem: 'Android, iOS',
   description: SITE.description,
   offers: [
-    { '@type': 'Offer', name: 'Retailer Plan', price: '999', priceCurrency: 'PKR' },
-    { '@type': 'Offer', name: 'Restaurant Plan', price: '2499', priceCurrency: 'PKR' },
-    { '@type': 'Offer', name: 'Distributor / Wholesaler Plan', price: '4999', priceCurrency: 'PKR' },
+    ...PLANS.map((p) => ({ '@type': 'Offer', name: p.name, price: String(p.monthly), priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: String(p.monthly), priceCurrency: 'USD', billingDuration: 'P1M' } })),
   ],
 };
 

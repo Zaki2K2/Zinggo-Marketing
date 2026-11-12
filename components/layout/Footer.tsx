@@ -1,4 +1,5 @@
 import { Logo } from '@/components/ui/Logo';
+import { PlayIcon } from '@/components/ui/PlayStoreButton';
 import { LEGAL_LINKS, NAV_LINKS, SITE, legalHref } from '@/lib/site';
 
 const LINKS = NAV_LINKS.filter((l) => ['Why Zinggo', 'Solutions', 'Features', 'Pricing'].includes(l.label));
@@ -20,6 +21,7 @@ export function Footer() {
         <div id="contact" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           <a href={`mailto:${SITE.email}`} className={link}>{SITE.email}</a>
           <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={link}>{SITE.phone}</a>
+          <a href={SITE.playStoreUrl} target="_blank" rel="noopener noreferrer" className={`${link} inline-flex items-center gap-1.5`}><PlayIcon size={15} /> Google Play</a>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
