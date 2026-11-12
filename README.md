@@ -11,11 +11,17 @@ npm run build && npm start
 npm run lint       # type-check (tsc --noEmit)
 ```
 
-## Deploy to Vercel
+## Build and deploy (static site)
 
-1. Push the folder to a Git repo and import it at vercel.com/new (framework auto-detected: Next.js), or run `npx vercel` and then `npx vercel --prod`.
-2. No environment variables are required.
-3. Once the domain is confirmed, update `metadataBase` in `app/layout.tsx`, add a `canonical` alternate, and update `app/sitemap.ts`.
+`npm run build` exports a plain static site into **`out/`** (`out/index.html` at the root, plus `_next/`, images, manifest, robots, sitemap). No Node server is needed, so it works on any static host.
+
+**Cloudflare Pages**
+- Upload: drag the contents of the `out` folder onto a Pages project (Direct Upload), or
+- Git: build command `npm run build`, build output directory `out`. Node 18 or newer.
+
+Also fine on Vercel, Netlify, GitHub Pages or S3 (output directory `out`). No environment variables are required.
+
+Once the domain is confirmed, update `metadataBase` in `app/layout.tsx` and the URL in `app/sitemap.ts`.
 
 ## Where to change things
 
