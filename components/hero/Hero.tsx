@@ -29,10 +29,7 @@ export function Hero() {
             <a href={trialHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full px-9 sm:w-auto">
               Start Free Trial <Icon name="arrow" size={18} strokeWidth={2.4} />
             </a>
-            <div className="flex gap-3">
-              <a href="#why-zinggo" className="btn btn-ghost flex-1 sm:flex-none">Explore Zinggo</a>
-              <PlayStoreButton className="flex-1 sm:flex-none" />
-            </div>
+            <PlayStoreButton className="w-full sm:w-auto" />
           </div>
           <p className="fade-in label mt-5 hidden text-aqua/55 sm:block" style={d(750)}>From ${FROM_PRICE}/mo · yearly {YEARLY_DISCOUNT}% off · free trial · T&amp;C apply</p>
 
