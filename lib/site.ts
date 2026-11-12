@@ -5,16 +5,15 @@ export const SITE = {
     'Manage your sales, inventory, orders, customers, and daily operations with Zinggo. Smart business management for retailers, restaurants, distributors, and growing businesses.',
   email: 'hi@zinggo.app',
   phone: '+92 307 533 6334',
-  /** Official WhatsApp number from the brochures. Used as the trial sign-up destination until a sign-up URL exists. */
+  /** Official WhatsApp number from the brochures. Used for the footer contact link. */
   whatsapp: 'https://wa.me/923075336334',
+  /** Merchant sign-up / login page that every Start Free Trial button opens. */
+  trialUrl: 'https://merchants.zinggo.app/login/merchant',
 } as const;
 
-/** Start Free Trial destination. Replace with a hosted sign-up URL when one is available. */
-export function trialHref(plan?: string): string {
-  const text = plan
-    ? `Hi Zinggo, I would like to start the free trial of the ${plan} plan.`
-    : 'Hi Zinggo, I would like to start a free trial.';
-  return `${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
+/** Start Free Trial destination: the merchant login page. `plan` is accepted for call-site clarity but the page is the same for every plan. */
+export function trialHref(_plan?: string): string {
+  return SITE.trialUrl;
 }
 
 export const NAV_LINKS = [

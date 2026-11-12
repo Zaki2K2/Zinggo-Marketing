@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { MusicToggle } from '@/components/layout/MusicToggle';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { Hero } from '@/components/hero/Hero';
 import { DemoProvider } from '@/components/demo/DemoProvider';
@@ -37,7 +36,6 @@ export default function Home() {
       </a>
       <ScrollProgress />
       <Navbar />
-      <MusicToggle />
       <DemoProvider>
       <main id="main">
         <Hero />

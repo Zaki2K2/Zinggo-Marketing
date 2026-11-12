@@ -77,7 +77,6 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 @keyframes fade-out { to { opacity: 0; transform: translateY(-6px); } }
 @keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-@keyframes music-bar { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
 
 
 /* Motion tokens (documented targets) and stacking strategy.
