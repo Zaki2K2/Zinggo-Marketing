@@ -13,7 +13,6 @@ const FLOATS = [
 export function FinalCta() {
   return (
     <section id="get-started" aria-labelledby="cta-title" className="on-light relative isolate overflow-hidden bg-brand py-28 text-deep sm:py-36">
-      <div className="dot-grid-dark absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
       {FLOATS.map((f) => (
         <div key={f.text} aria-hidden="true" className={`float-y absolute -z-0 items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-[0_24px_40px_-20px_rgba(7,27,27,0.5)] ${f.cls}`} style={d(f.delay)}>
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-deep text-brand"><Icon name={f.icon} size={18} /></span>

@@ -77,8 +77,8 @@ export function HeroMockup() {
 
   return (
     <div ref={rootRef} className="relative mx-auto w-full max-w-[620px]">
-      <div className="relative flex justify-center">
-        <div data-paused={!running} role="img" aria-label={`Interactive Zinggo Merchant app demonstration. Current step: ${current.label}.`}>
+      <div className="relative mx-auto flex h-[552px] justify-center">
+        <div className="origin-top scale-[0.92]" data-paused={!running} role="img" aria-label={`Interactive Zinggo Merchant app demonstration. Current step: ${current.label}.`}>
           <PhoneFrame tab={current.tab}>
             <div key={`${step}-${runKey}`} className="screen-enter absolute inset-0">
               {current.render()}
@@ -87,7 +87,7 @@ export function HeroMockup() {
         </div>
 
         {/* Floating panels (large screens). All react to the same loop step as the phone. */}
-        <aside aria-hidden="true" className="float-y absolute left-0 top-20 hidden w-[196px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] xl:block" style={{ animationPlayState: running ? 'running' : 'paused', animationDelay: '-2s' }}>
+        <aside aria-hidden="true" className="float-y absolute -left-4 top-16 hidden w-[172px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] xl:block" style={{ animationPlayState: running ? 'running' : 'paused', animationDelay: '-2s' }}>
           <p className="text-[11px] font-bold text-muted">Orders</p>
           <div className={`mt-2 rounded-xl border px-2.5 py-2 transition-[opacity,transform,background-color,border-color] duration-500 [transition-timing-function:var(--ease-panel)] ${step >= 1 && step <= 5 ? 'border-brand bg-brand-soft opacity-100' : step >= 6 || step === 0 ? 'border-line bg-mist opacity-100' : 'opacity-0'}`}>
             <p className="text-[12px] font-extrabold">#ZG-1042</p>
@@ -97,7 +97,7 @@ export function HeroMockup() {
           <div className="mt-1.5 rounded-xl bg-mist px-2.5 py-2 text-[10.5px] font-semibold text-muted">#ZG-1041 · Ready</div>
         </aside>
 
-        <aside aria-hidden="true" className="float-y absolute bottom-24 left-0 hidden w-[196px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] xl:block" style={{ animationPlayState: running ? 'running' : 'paused', animationDelay: '-4s' }}>
+        <aside aria-hidden="true" className="float-y absolute bottom-20 -left-4 hidden w-[172px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] xl:block" style={{ animationPlayState: running ? 'running' : 'paused', animationDelay: '-4s' }}>
           <p className="text-[11px] font-bold text-muted">Stock</p>
           <div className="mt-2 flex items-center justify-between text-[12px]">
             <span className="font-semibold">Chicken Biryani</span>
@@ -109,13 +109,13 @@ export function HeroMockup() {
           </div>
         </aside>
 
-        <aside aria-hidden="true" className={`absolute bottom-40 right-0 hidden w-[196px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] transition-[opacity,transform] duration-500 [transition-timing-function:var(--ease-panel)] xl:block ${step >= 4 ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'}`}>
+        <aside aria-hidden="true" className={`absolute bottom-36 -right-4 hidden w-[172px] rounded-[20px] border border-white/10 bg-white p-3.5 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] transition-[opacity,transform] duration-500 [transition-timing-function:var(--ease-panel)] xl:block ${step >= 4 ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'}`}>
           <p className="text-[11px] font-bold text-muted">Payment</p>
           <p className="mt-1 text-[12px] font-extrabold">Easypaisa · Rs 1,850</p>
           <p className="mt-1 flex items-center gap-1 text-[10.5px] font-bold text-brand-ink"><span className="h-1.5 w-1.5 rounded-full bg-brand" />{step >= 5 ? 'Recorded · EP-88231' : 'Recording reference…'}</p>
         </aside>
 
-        <aside aria-hidden="true" className="float-y absolute right-0 top-6 hidden w-[196px] rounded-[20px] border border-white/10 bg-white p-4 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] xl:block" style={{ animationPlayState: running ? 'running' : 'paused' }}>
+        <aside aria-hidden="true" className="float-y absolute -right-4 top-4 hidden w-[172px] rounded-[20px] border border-white/10 bg-white p-4 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] xl:block" style={{ animationPlayState: running ? 'running' : 'paused' }}>
           <div className="flex items-center justify-between">
             <p className="text-[11px] font-bold text-muted">Live dashboard</p>
             <span className="flex items-center gap-1 text-[10px] font-bold text-brand-ink">
@@ -144,7 +144,7 @@ export function HeroMockup() {
       </div>
 
       {/* Controls */}
-      <div className="mx-auto mt-6 max-w-[420px] text-center">
+      <div className="mx-auto mt-2 max-w-[420px] text-center">
         <p className="t-eyebrow mb-1 text-brand" aria-live="polite">
           Step {step + 1} of {STEPS.length} · {current.label}
         </p>

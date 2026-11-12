@@ -82,7 +82,6 @@ export function Community() {
             </ul>
 
             <article key={s.id} aria-live="polite" className={`screen-enter relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-card bg-gradient-to-br p-7 sm:p-10 ${s.hue} ${s.dark ? 'text-white' : 'text-deep'}`}>
-              <div className="dot-grid-dark absolute inset-0 opacity-40" aria-hidden="true" />
               <div className="relative">
                 <p className="t-eyebrow opacity-75">{s.kind}</p>
                 <p className="mt-5 text-[clamp(26px,3.2vw,40px)] font-extrabold leading-[1.08] tracking-[-0.03em]">{s.headline}</p>
