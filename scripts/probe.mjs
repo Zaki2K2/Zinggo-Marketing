@@ -38,13 +38,13 @@ const ok = (cond, msg) => log.push(`${cond ? 'PASS' : 'FAIL'}  ${msg}`);
   ok(['Home', 'POS', 'Catalog', 'Orders', 'Reports'].every((t) => seq.includes(t)), 'autoplay visits Home, POS, Catalog, Orders and Reports');
 
   // Manual takeover: reset first, then act as a user
-  await p.getByRole('button', { name: 'Replay from the start' }).first().click();
+  await p.getByRole('button', { name: 'Run a sale' }).first().click({ force: true });
   await p.waitForTimeout(400);
   const phone = p.locator('.demo-stage').first();
   const t = (sel) => phone.locator(`[data-demo="${sel}"]`);
   await t('tab-pos').click();
   await p.waitForTimeout(300);
-  ok((await p.locator('text=You’re in control').count()) > 0, 'first touch pauses autoplay and shows "You’re in control"');
+  ok((await p.locator('text=Your turn').count()) > 0, 'first touch hands control to the visitor (announced to screen readers)');
   await t('product-biryani').click();
   await t('sheet-plus').click();
   await t('sheet-add').click();
@@ -86,6 +86,9 @@ const ok = (cond, msg) => log.push(`${cond ? 'PASS' : 'FAIL'}  ${msg}`);
   const board = await p.locator('#why-zinggo').innerText();
   ok(board.includes('#ZG-1042') && board.includes('Rs 26,700') && board.includes('Reference JC-88231'), 'operations board shows the same sale and totals');
   await p.screenshot({ path: `${OUT}/ops-after-manual.png` });
+  await p.waitForTimeout(8000);
+  const after = await p.locator('#why-zinggo').innerText();
+  ok(after.includes('Live demo'), 'demo quietly resumes by itself ~12s after the last touch');
   await p.evaluate(() => window.scrollTo(0, 0));
 
   // Scroll down + up: layout shift and slow frames

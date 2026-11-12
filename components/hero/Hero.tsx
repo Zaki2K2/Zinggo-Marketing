@@ -1,6 +1,5 @@
 import { HeroDemo } from './HeroDemo';
 import { HeroParallax } from './HeroParallax';
-import { HeroTracker } from './HeroTracker';
 import { Icon } from '@/components/ui/Icon';
 import { d } from '@/components/mockup/parts';
 import { trialHref } from '@/lib/site';
@@ -32,9 +31,6 @@ export function Hero() {
           </div>
           <p className="fade-in label mt-5 hidden text-white/40 sm:block" style={d(750)}>From Rs 999/mo · free trial · T&amp;C apply</p>
 
-          <div className="mt-10 hidden lg:block">
-            <HeroTracker />
-          </div>
         </div>
 
         <div id="how-it-works" className="scroll-mt-20" style={{ transform: 'translate3d(0, calc(var(--hp, 0) * -36px), 0) scale(calc(1 - var(--hp, 0) * 0.04))', transformOrigin: '50% 0%' }}>

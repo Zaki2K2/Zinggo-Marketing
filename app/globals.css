@@ -100,6 +100,12 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 
 /* Demo phone: designed at 316x652, scaled by viewport height so it always fits without reflow. */
 .demo-box { --s: 1; width: calc(316px * var(--s)); height: calc(652px * var(--s)); }
+/* Hero phone pose: turned and leaning in 3D. Side thickness is faked with stacked shadows on the stage: real preserve-3d breaks hit-testing of the buttons inside. */
+.phone-persp { perspective: 1800px; }
+.phone-tilt { --ry: -17deg; --rx: 3deg; --rz: 3deg; transform: rotateY(var(--ry)) rotateX(var(--rx)) rotateZ(var(--rz)); }
+@media (max-width: 1023px) { .phone-tilt { --ry: -9deg; --rx: 2deg; --rz: 2deg; } }
+@keyframes demo-toast { 0% { opacity: 0; transform: translate3d(0, -140%, 0); } 10% { opacity: 1; transform: none; } 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translate3d(0, -30%, 0); } }
+.demo-toast { animation: demo-toast 4.2s var(--ease-panel) both; }
 .demo-stage { transform: scale(var(--s)); transform-origin: top left; --d: 0ms; } /* --d is inherited: reset so entrance delays on the page do not leak into the app */
 @media (max-height: 800px) { .demo-box { --s: 0.92; } }
 @media (max-height: 740px) { .demo-box { --s: 0.84; } }

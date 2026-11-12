@@ -15,6 +15,7 @@ import type { Action, DemoState } from '@/lib/demo/types';
  */
 
 const TAP_MS = 700;
+const IDLE_RESUME_MS = 12000; // after the visitor stops touching the phone, the demo quietly starts over
 const START_DELAY_MS = 1500; // lets the hero entrance finish before the demo starts
 
 interface Ctrl {
@@ -54,6 +55,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [manual, setManual] = useState(false);
   const [cursor, setCursor] = useState<{ target: string; tick: number } | null>(null);
   const [presenters, setPresenters] = useState(0);
+  const [touchTick, setTouchTick] = useState(0);
   const [epoch, setEpoch] = useState(0); // bumped by seek/replay so the step effect restarts even if the index is unchanged
   const [tabVisible, setTabVisible] = useState(true);
   const applied = useRef(-1);
@@ -131,7 +133,14 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     setPlaying(true);
   }, []);
 
-  const touch = useCallback(() => { setManual(true); setPlaying(false); setCursor(null); }, []);
+  const touch = useCallback(() => { setManual(true); setPlaying(false); setCursor(null); setTouchTick((n) => n + 1); }, []);
+
+  // Never resumes mid-interaction; only after IDLE_RESUME_MS without a touch, from a clean state.
+  useEffect(() => {
+    if (!manual) return;
+    const id = window.setTimeout(replay, IDLE_RESUME_MS);
+    return () => window.clearTimeout(id);
+  }, [manual, touchTick, replay]);
 
   const present = useCallback(() => {
     setPresenters((n) => n + 1);

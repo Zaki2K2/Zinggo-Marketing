@@ -14,6 +14,21 @@ const TABS: { id: Tab; label: string; icon: IconName }[] = [
   { id: 'reports', label: 'Reports', icon: 'chart' },
 ];
 
+/** Position of an element's centre in the stage's own (untransformed) coordinates. */
+function localCenter(el: HTMLElement, root: HTMLElement) {
+  let x = 0;
+  let y = 0;
+  let n: HTMLElement | null = el;
+  while (n && n !== root) {
+    x += n.offsetLeft;
+    y += n.offsetTop;
+    const p = n.offsetParent as HTMLElement | null;
+    if (p && p !== root) { x -= p.scrollLeft; y -= p.scrollTop; x += p.clientLeft; y += p.clientTop; }
+    n = p;
+  }
+  return { x: x + el.offsetWidth / 2, y: y + el.offsetHeight / 2 };
+}
+
 const tabOf = (v: string): Tab => (v === 'checkout' || v === 'receipt' ? 'pos' : (v as Tab));
 
 /**
@@ -35,10 +50,7 @@ export function DemoPhone() {
       const st = stage.current;
       const el = st?.querySelector<HTMLElement>(`[data-demo="${cursor.target}"]`);
       if (!st || !el) return;
-      const s = st.getBoundingClientRect();
-      const k = s.width / st.offsetWidth || 1;
-      const r = el.getBoundingClientRect();
-      setPos({ x: (r.left + r.width / 2 - s.left) / k, y: (r.top + r.height / 2 - s.top) / k });
+      setPos(localCenter(el, st));
     });
     return () => cancelAnimationFrame(id);
   }, [cursor]);
@@ -50,7 +62,7 @@ export function DemoPhone() {
     <div ref={box} className="demo-box mx-auto">
       <div
         ref={stage}
-        className="demo-stage relative h-[652px] w-[316px] rounded-[50px] bg-gradient-to-b from-[#3a3f50] via-[#1a1d29] to-[#0b0c14] p-[9px] shadow-[0_60px_100px_-30px_rgba(0,0,0,0.9),0_30px_60px_-30px_rgba(0,199,190,0.35),inset_0_0_0_1.5px_rgba(255,255,255,0.14),inset_0_0_0_4px_rgba(0,0,0,0.5)]"
+        className="demo-stage relative h-[652px] w-[316px] rounded-[50px] bg-gradient-to-b from-[#3a3f50] via-[#1a1d29] to-[#0b0c14] p-[9px] shadow-[7px_3px_0_-1px_#2a2e3c,13px_5px_0_-2px_#181b26,0_60px_100px_-30px_rgba(0,0,0,0.9),0_30px_60px_-30px_rgba(0,199,190,0.35),inset_0_0_0_1.5px_rgba(255,255,255,0.14),inset_0_0_0_4px_rgba(0,0,0,0.5)]"
         onPointerDownCapture={touch}
         onKeyDownCapture={onKey}
         role="group"
@@ -83,6 +95,17 @@ export function DemoPhone() {
             </div>
             <ProductSheet />
           </div>
+
+          {state.lastSale && view === 'receipt' && (
+            <div key={state.lastSale.no} role="status" className="demo-toast absolute inset-x-3 top-[46px] z-50 flex items-center gap-2.5 rounded-2xl bg-[#0A081B]/95 px-3 py-2.5 text-white shadow-xl">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#00C7BE] text-[#071B1B]"><Icon name="check" size={16} strokeWidth={3} /></span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[12px] font-extrabold">Sale recorded</span>
+                <span className="block truncate text-[10.5px] text-white/70">{state.lastSale.no} · Rs {state.lastSale.total.toLocaleString('en-PK')}</span>
+              </span>
+              <span className="text-[10px] text-white/50">now</span>
+            </div>
+          )}
 
           <nav aria-label="App tabs" className="absolute inset-x-0 bottom-0 z-30 flex h-[60px] items-start justify-around border-t border-[#e5eae8] bg-white/95 pt-1.5 backdrop-blur">
             {TABS.map((t) => {
