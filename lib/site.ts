@@ -19,9 +19,9 @@ export function trialHref(plan?: string): string {
 
 export const NAV_LINKS = [
   { label: 'Why Zinggo', href: '#why-zinggo' },
+  { label: 'Solutions', href: '#solutions' },
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Community', href: '#community' },
   { label: 'Pricing', href: '#pricing' },
 ] as const;
 

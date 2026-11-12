@@ -85,6 +85,38 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 @keyframes music-bar { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
 @keyframes shimmer { to { background-position: -200% 0; } }
 
+@keyframes product-in { from { opacity: 0; transform: perspective(1200px) translateY(70px) rotateX(14deg) scale(0.93); } to { opacity: 1; transform: none; } }
+.product-in { animation: product-in 1s var(--ease-panel) both; animation-delay: var(--d, 0ms); transform-origin: 50% 100%; }
+
+/* Motion tokens (documented targets) and stacking strategy.
+   Stacking: the page uses a few named layers only; card stacks/stages create their own isolated contexts.
+   header 50 · floating controls 50 · scroll progress 70 · skip link 80 · everything else is local to its stage. */
+:root {
+  --dur-micro: 0.16s;
+  --dur-card: 0.3s;
+  --dur-text: 0.7s;
+  --dur-product: 1s;
+  --dur-screen: 0.9s;
+  --z-header: 50;
+  --z-progress: 70;
+  --z-skip: 80;
+}
+@keyframes drift { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(48px, -36px, 0); } }
+@keyframes row-loop { 0% { opacity: 0; transform: translateY(8px); } 8% { opacity: 1; transform: none; } 86% { opacity: 1; } 96%, 100% { opacity: 0; } }
+@keyframes loop-bar { 0% { transform: scaleX(0); } 70%, 100% { transform: scaleX(1); } }
+@keyframes marquee-l { to { transform: translateX(-50%); } }
+@keyframes marquee-r { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes rise-line { from { transform: translateY(110%); } to { transform: none; } }
+
+.drift { animation: drift 20s ease-in-out infinite; animation-delay: var(--d, 0ms); }
+.loop-row { opacity: 0; animation: row-loop 9s var(--ease-panel) infinite; animation-delay: var(--d, 0ms); }
+.marquee-l { display: flex; width: max-content; animation: marquee-l 60s linear infinite; }
+.marquee-r { display: flex; width: max-content; animation: marquee-r 70s linear infinite; }
+.marquee:hover .marquee-l, .marquee:hover .marquee-r { animation-play-state: paused; }
+.text-outline { -webkit-text-stroke: 2px currentColor; color: transparent; }
+.line-mask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.line-mask > span { display: block; animation: rise-line 0.9s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
+
 .screen-enter { animation: screen-in 0.5s var(--ease-panel) both; }
 .pop-in { animation: pop-in 0.45s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
 .slide-down { animation: slide-down 0.55s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
@@ -117,5 +149,7 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
   .js .reveal { opacity: 1; transform: none; }
+  .loop-row { opacity: 1; }
+  .marquee-l, .marquee-r { animation: none; }
   .scroll-progress { display: none !important; }
 }

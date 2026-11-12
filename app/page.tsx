@@ -4,15 +4,16 @@ import { Footer } from '@/components/layout/Footer';
 import { MusicToggle } from '@/components/layout/MusicToggle';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { Hero } from '@/components/hero/Hero';
-import { Benefits } from '@/components/sections/Benefits';
+import { Business } from '@/components/sections/Business';
+import { Marquee } from '@/components/sections/Marquee';
 import { Pricing } from '@/components/sections/Pricing';
 import { FinalCta } from '@/components/sections/FinalCta';
 import { SITE } from '@/lib/site';
 
 // Code-split the interactive below-the-fold sections.
-const Trust = dynamic(() => import('@/components/sections/Trust').then((m) => m.Trust));
-const FeatureShowcase = dynamic(() => import('@/components/sections/FeatureShowcase').then((m) => m.FeatureShowcase));
-const WorkflowStory = dynamic(() => import('@/components/sections/WorkflowStory').then((m) => m.WorkflowStory));
+const StackedCards = dynamic(() => import('@/components/sections/StackedCards').then((m) => m.StackedCards));
+const StoryScene = dynamic(() => import('@/components/story/StoryScene').then((m) => m.StoryScene));
+const TrustEditorial = dynamic(() => import('@/components/sections/TrustEditorial').then((m) => m.TrustEditorial));
 const Community = dynamic(() => import('@/components/sections/Community').then((m) => m.Community));
 
 const jsonLd = {
@@ -40,10 +41,11 @@ export default function Home() {
       <MusicToggle />
       <main id="main">
         <Hero />
-        <Benefits />
-        <Trust />
-        <WorkflowStory />
-        <FeatureShowcase />
+        <StackedCards />
+        <StoryScene />
+        <Business />
+        <Marquee />
+        <TrustEditorial />
         <Community />
         <Pricing />
         <FinalCta />
