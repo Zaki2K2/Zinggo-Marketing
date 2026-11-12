@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ───────── Design tokens (Tailwind v4 @theme) ───────── */
+@theme {
+  --color-brand: #00c7be;
+  --color-brand-ink: #00706b; /* teal safe for text on light surfaces (>=4.5:1) */
+  --color-brand-soft: #e6f9f8;
+  --color-night: #0a081b;
+  --color-deep: #071b1b;
+  --color-paper: #f5f5f5;
+  --color-mist: #f3f5f4;
+  --color-ink: #111716;
+  --color-muted: #5a6563;
+  --color-line: #e5eae8;
+  --color-neon: #c6ff33;
+  --color-amber: #ffd84d;
+  --color-danger: #c62a2a;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius-card: 28px;
+  --radius-tile: 20px;
+
+  --ease-micro: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-panel: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --shadow-soft: 0 1px 2px rgb(10 8 27 / 0.04), 0 12px 32px -12px rgb(10 8 27 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(10 8 27 / 0.05), 0 28px 60px -20px rgb(10 8 27 / 0.28);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font-sans); color: var(--color-ink); background: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--color-brand); color: var(--color-deep); }
+
+:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 3px; border-radius: 8px; }
+.on-light :focus-visible { outline-color: var(--color-brand-ink); }
+
+/* ───────── Typography helpers ───────── */
+.t-hero { font-size: clamp(40px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; text-wrap: balance; }
+.t-section { font-size: clamp(36px, 5vw, 64px); line-height: 1.04; letter-spacing: -0.032em; font-weight: 800; text-wrap: balance; }
+.t-card { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+.t-eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+.t-body { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.6; }
+
+/* ───────── Buttons ───────── */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-weight: 700; padding: 15px 28px; font-size: 16px; line-height: 1; white-space: nowrap; cursor: pointer; transition: transform 0.16s var(--ease-micro), background-color 0.16s var(--ease-micro), box-shadow 0.16s var(--ease-micro), color 0.16s; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--color-brand); color: var(--color-deep); box-shadow: 0 10px 30px -10px rgb(0 199 190 / 0.7); }
+.btn-primary:hover { background: #19d8cf; }
+.btn-dark { background: var(--color-deep); color: #fff; }
+.btn-dark:hover { background: #0d2a2a; }
+.btn-ghost { color: #fff; border: 1.5px solid rgb(255 255 255 / 0.28); }
+.btn-ghost:hover { background: rgb(255 255 255 / 0.08); }
+.btn-outline { color: var(--color-ink); border: 1.5px solid var(--color-line); background: #fff; }
+.btn-outline:hover { border-color: var(--color-ink); }
+.btn-sm { padding: 11px 20px; font-size: 14px; }
+
+/* ───────── Scroll progress (CSS scroll-driven, where supported) ───────── */
+.scroll-progress { position: fixed; inset: 0 0 auto 0; height: 3px; background: var(--color-brand); transform-origin: 0 50%; transform: scaleX(0); z-index: 70; display: none; }
+@supports (animation-timeline: scroll()) {
+  .scroll-progress { display: block; animation: progress-grow linear both; animation-timeline: scroll(root); }
+}
+@keyframes progress-grow { to { transform: scaleX(1); } }
+
+/* ───────── Scroll reveal (once). Content stays visible without JS. ───────── */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease-panel), transform 0.6s var(--ease-panel); transition-delay: var(--reveal-delay, 0ms); }
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ───────── Keyframes ───────── */
+@keyframes screen-in { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: none; } }
+@keyframes pop-in { from { opacity: 0; transform: translateY(10px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes slide-down { from { opacity: 0; transform: translateY(-120%); } to { opacity: 1; transform: none; } }
+@keyframes slide-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@keyframes tap-ring { 0% { opacity: 0; transform: scale(0.3); } 30% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+@keyframes fade-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes select-on { to { border-color: var(--color-brand); background: var(--color-brand-soft); box-shadow: 0 0 0 3px rgb(0 199 190 / 0.25); } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.25); color: var(--color-brand-ink); } 100% { transform: scale(1); } }
+@keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes scan-line { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(54px); } }
+@keyframes cycle-hl { 0%, 20% { background: var(--color-brand); color: var(--color-deep); } 25%, 100% { background: var(--color-mist); color: var(--color-ink); } }
+@keyframes music-bar { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+.screen-enter { animation: screen-in 0.5s var(--ease-panel) both; }
+.pop-in { animation: pop-in 0.45s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
+.slide-down { animation: slide-down 0.55s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
+.slide-up { animation: slide-up 0.6s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
+.sel-on { animation: select-on 0.3s var(--ease-micro) forwards; animation-delay: var(--d, 0ms); }
+.bump { animation: bump 0.4s var(--ease-micro); }
+.fade-in { animation: fade-in 0.35s var(--ease-panel) both; }
+.float-y { animation: float-y 6s ease-in-out infinite; animation-delay: var(--d, 0ms); }
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1s var(--ease-panel) forwards; animation-delay: var(--d, 0ms); }
+.grow-y { transform-origin: bottom; animation: grow-y 0.7s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
+.grow-x { transform-origin: left; animation: grow-x 0.8s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
+.swap-out { animation: fade-out 0.3s var(--ease-micro) forwards; animation-delay: var(--d, 0ms); }
+.swap-in { opacity: 0; animation: fade-in 0.3s var(--ease-micro) forwards; animation-delay: var(--d, 0ms); }
+.skeleton { background: linear-gradient(90deg, #eef2f1 25%, #f8faf9 50%, #eef2f1 75%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+
+.tap { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 999px; border: 2px solid var(--color-brand); background: rgb(0 199 190 / 0.35); opacity: 0; pointer-events: none; z-index: 40; animation: tap-ring 0.9s ease-out both; animation-delay: var(--d, 0ms); }
+
+/* Pause scripted demo animations when the sequence is paused */
+[data-paused="true"], [data-paused="true"] * { animation-play-state: paused !important; }
+
+/* Carousel scrollbars */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.dot-grid { background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px); background-size: 28px 28px; }
+.dot-grid-dark { background-image: radial-gradient(rgb(7 27 27 / 0.1) 1px, transparent 1px); background-size: 24px 24px; }
+
+/* ───────── Reduced motion: stop autoplay, remove reveals, minimise transitions ───────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+  .js .reveal { opacity: 1; transform: none; }
+  .scroll-progress { display: none !important; }
+}
