@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Icon, type IconName } from '@/components/ui/Icon';
+import { PRODUCTS } from '@/lib/demo/data';
 import type { Tab } from '@/lib/demo/types';
 import { usePresence, useDemo } from './DemoProvider';
 import { PhoneIntro } from './PhoneIntro';
@@ -44,6 +45,9 @@ export function DemoPhone() {
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
   usePresence(box, 0.2);
 
+  // Warm the browser cache so product photos are already there when the demo opens POS.
+  useEffect(() => { PRODUCTS.forEach((p) => { const i = new window.Image(); i.src = p.image; }); }, []);
+
   // Move the demo cursor onto the element it is about to tap.
   useEffect(() => {
     if (!cursor) return;
@@ -63,7 +67,7 @@ export function DemoPhone() {
     <div ref={box} className="demo-box mx-auto">
       <div
         ref={stage}
-        className="demo-stage relative h-[652px] w-[316px] rounded-[50px] bg-gradient-to-b from-[#3a3f50] via-[#1a1d29] to-[#0b0c14] p-[9px] shadow-[7px_3px_0_-1px_#2a2e3c,13px_5px_0_-2px_#181b26,0_60px_100px_-30px_rgba(0,0,0,0.9),0_30px_60px_-30px_rgba(0,199,190,0.35),inset_0_0_0_1.5px_rgba(255,255,255,0.14),inset_0_0_0_4px_rgba(0,0,0,0.5)]"
+        className="demo-stage relative h-[652px] w-[316px] rounded-[50px] bg-gradient-to-b from-[#3a3f50] via-[#1a1d29] to-[#0b0c14] p-[9px] shadow-[7px_3px_0_-1px_#2a2e3c,13px_5px_0_-2px_#181b26,0_60px_100px_-30px_rgba(0,0,0,0.9),0_30px_60px_-30px_rgba(0,204,192,0.35),inset_0_0_0_1.5px_rgba(255,255,255,0.14),inset_0_0_0_4px_rgba(0,0,0,0.5)]"
         onPointerDownCapture={introDone ? touch : undefined}
         onKeyDownCapture={onKey}
         role="group"
@@ -73,7 +77,7 @@ export function DemoPhone() {
         <span className="absolute -left-[3px] top-24 h-9 w-[3px] rounded-l bg-[#252938]" aria-hidden="true" />
         <span className="absolute -left-[3px] top-36 h-14 w-[3px] rounded-l bg-[#252938]" aria-hidden="true" />
 
-        <div className="relative h-full w-full overflow-hidden rounded-[41px] bg-[#F3F6F6] text-[#111716]">
+        <div className="relative h-full w-full overflow-hidden rounded-[41px] bg-[#F5F5F5] text-[#111716]">
           <PhoneIntro />
 
           {/* status bar */}
@@ -100,8 +104,8 @@ export function DemoPhone() {
           </div>
 
           {state.lastSale && view === 'receipt' && (
-            <div key={state.lastSale.no} role="status" className="demo-toast absolute inset-x-3 top-[46px] z-50 flex items-center gap-2.5 rounded-2xl bg-[#0A081B]/95 px-3 py-2.5 text-white shadow-xl">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#00C7BE] text-[#071B1B]"><Icon name="check" size={16} strokeWidth={3} /></span>
+            <div key={state.lastSale.no} role="status" className="demo-toast absolute inset-x-3 top-[46px] z-50 flex items-center gap-2.5 rounded-2xl bg-[#003836]/95 px-3 py-2.5 text-white shadow-xl">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#00CCC0] text-[#003836]"><Icon name="check" size={16} strokeWidth={3} /></span>
               <span className="min-w-0 flex-1">
                 <span className="block text-[12px] font-extrabold">Sale recorded</span>
                 <span className="block truncate text-[10.5px] text-white/70">{state.lastSale.no} · Rs {state.lastSale.total.toLocaleString('en-PK')}</span>

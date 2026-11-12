@@ -7,7 +7,7 @@ const link = 'whitespace-nowrap text-white/70 transition-colors duration-150 hov
 /** Single-row footer. Wraps into centred lines on smaller screens. */
 export function Footer() {
   return (
-    <footer className="relative -mt-10 rounded-t-[40px] bg-night text-white" aria-label="Site footer">
+    <footer className="relative -mt-10 rounded-t-[40px] bg-deep text-white" aria-label="Site footer">
       <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-center gap-x-8 gap-y-4 px-5 py-8 text-[13px] sm:px-10 lg:justify-between lg:gap-x-5 lg:pr-24">
         <Logo />
 

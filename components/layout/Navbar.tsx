@@ -7,14 +7,6 @@ import { NAV_LINKS, trialHref } from '@/lib/site';
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -33,8 +25,8 @@ export function Navbar() {
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <nav
         aria-label="Primary"
-        className={`pointer-events-auto mx-auto flex max-w-7xl items-center justify-between rounded-full border px-4 py-2.5 backdrop-blur-xl transition-colors duration-300 sm:px-6 ${
-          scrolled || open ? 'border-white/15 bg-night/80' : 'border-white/10 bg-white/[0.05]'
+        className={`pointer-events-auto mx-auto flex max-w-7xl items-center justify-between rounded-full border px-4 py-2.5 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 sm:px-6 ${
+          'border-white/25 bg-black/30 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.35)]'
         }`}
       >
         <a href="#top" aria-label="Zinggo home" onClick={close} className="rounded-full">
@@ -74,7 +66,7 @@ export function Navbar() {
 
       <div
         id="mobile-menu"
-        className={`pointer-events-auto mx-auto mt-2 max-w-7xl overflow-hidden rounded-[28px] border border-white/15 bg-night/95 backdrop-blur-xl transition-[opacity,transform,visibility] duration-500 [transition-timing-function:var(--ease-panel)] lg:hidden ${
+        className={`pointer-events-auto mx-auto mt-2 max-w-7xl overflow-hidden rounded-[28px] border border-white/25 bg-black/50 backdrop-blur-xl backdrop-saturate-150 transition-[opacity,transform,visibility] duration-500 [transition-timing-function:var(--ease-panel)] lg:hidden ${
           open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-3 opacity-0'
         }`}
       >

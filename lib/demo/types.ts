@@ -11,6 +11,8 @@ export interface Product {
   unit: string;
   category: Category;
   tone: string;
+  /** Square photo under /public/products (see public/products/CREDITS.md). */
+  image: string;
 }
 
 export interface SaleLine {

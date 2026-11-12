@@ -25,7 +25,7 @@ const shot = (src: string, alt: string): ReactNode => (
 const COLS: { label: string; title: ReactNode; text: string; tags: string; plan: string; price: string; note?: string; drift: number; node: ReactNode }[] = [
   {
     label: 'Retailers',
-    title: <>The counter, <span className="text-brand">connected.</span></>,
+    title: <>The counter, <span className="text-sun">connected.</span></>,
     text: 'Scan, sell and watch stock drop. Reorder from a supplier when something runs low.',
     tags: 'POS · Barcodes · Batches and expiry · Credit',
     plan: 'Retailer', price: 'Rs 999', drift: 70,
@@ -33,7 +33,7 @@ const COLS: { label: string; title: ReactNode; text: string; tags: string; plan:
   },
   {
     label: 'Restaurants and cafés',
-    title: <>Table to kitchen to <span className="text-brand">doorstep.</span></>,
+    title: <>Table to kitchen to <span className="text-sun">doorstep.</span></>,
     text: 'QR orders for dine-in and takeaway, a live order queue and delivery riders.',
     tags: 'QR ordering · Menus and recipes · Delivery · Loyalty',
     plan: 'Restaurant', price: 'Rs 2,499', drift: 0,
@@ -41,7 +41,7 @@ const COLS: { label: string; title: ReactNode; text: string; tags: string; plan:
   },
   {
     label: 'Distributors and wholesalers',
-    title: <>Every order, <span className="text-brand">on route.</span></>,
+    title: <>Every order, <span className="text-sun">on route.</span></>,
     text: 'Take orders from merchants, keep stock honest and organise deliveries by area.',
     tags: 'Merchant ordering · Inventory · Delivery areas',
     plan: 'Distributor / Wholesaler', price: 'Rs 4,999', note: 'Stock screen shown is a demo recreation.', drift: -70,

@@ -3,7 +3,7 @@ import { ScreenHeader, d } from '../parts';
 /** Demo customer-credit screen (illustrative data), used in the stacked feature cards. */
 export function CreditScreen() {
   return (
-    <div className="relative h-full bg-[#F3F6F6]">
+    <div className="relative h-full bg-[#F5F5F5]">
       <ScreenHeader title="Customers" />
       <div className="px-3">
         <div className="flex items-center gap-3 rounded-2xl bg-white p-3 shadow-sm">
@@ -17,7 +17,7 @@ export function CreditScreen() {
         <div className="mt-2 rounded-2xl bg-white p-3 shadow-sm">
           <p className="text-[10.5px] font-medium text-[#66716F]">Credit outstanding</p>
           <p className="text-[24px] font-extrabold tracking-tight">Rs 1,800</p>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e8eeed]"><div className="grow-x h-full rounded-full bg-[#00C7BE]" style={{ width: '36%', ...d(300) }} /></div>
+          <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e8eeed]"><div className="grow-x h-full rounded-full bg-[#00CCC0]" style={{ width: '36%', ...d(300) }} /></div>
           <p className="mt-1 text-[10px] text-[#66716F]">36% of Rs 5,000 credit limit</p>
         </div>
 
@@ -30,7 +30,7 @@ export function CreditScreen() {
             </div>
           ))}
         </div>
-        <div className="mt-3 rounded-full bg-[#00C7BE] py-2.5 text-center text-[12px] font-extrabold text-[#071B1B]">Record payment</div>
+        <div className="mt-3 rounded-full bg-[#00CCC0] py-2.5 text-center text-[12px] font-extrabold text-[#003836]">Record payment</div>
       </div>
     </div>
   );

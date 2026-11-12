@@ -17,11 +17,11 @@ const TABS: { id: TabId; label: string; icon: IconName }[] = [
  */
 export function PhoneFrame({ children, tab, chrome = true }: { children: ReactNode; tab: TabId; chrome?: boolean }) {
   return (
-    <div className="relative mx-auto h-[600px] w-[292px] rounded-[46px] bg-gradient-to-b from-[#2b2f3d] to-[#0b0c14] p-[9px] shadow-[0_50px_90px_-30px_rgba(0,199,190,0.45),0_30px_60px_-20px_rgba(0,0,0,0.8),inset_0_0_0_1.5px_rgba(255,255,255,0.12)]">
+    <div className="relative mx-auto h-[600px] w-[292px] rounded-[46px] bg-gradient-to-b from-[#2b2f3d] to-[#0b0c14] p-[9px] shadow-[0_50px_90px_-30px_rgba(0,204,192,0.45),0_30px_60px_-20px_rgba(0,0,0,0.8),inset_0_0_0_1.5px_rgba(255,255,255,0.12)]">
       <span className="absolute -right-[3px] top-28 h-16 w-[3px] rounded-r bg-[#1b1e2a]" aria-hidden="true" />
       <span className="absolute -left-[3px] top-24 h-9 w-[3px] rounded-l bg-[#1b1e2a]" aria-hidden="true" />
       <span className="absolute -left-[3px] top-36 h-12 w-[3px] rounded-l bg-[#1b1e2a]" aria-hidden="true" />
-      <div className="relative h-full w-full overflow-hidden rounded-[37px] bg-[#F3F6F6] text-[#111716]">
+      <div className="relative h-full w-full overflow-hidden rounded-[37px] bg-[#F5F5F5] text-[#111716]">
         {chrome && (
           <div className="pointer-events-none absolute inset-x-0 top-0 z-40 flex h-9 items-center justify-between px-6 pt-1 text-[11px] font-bold">
             <span className="text-[#111716]">10:16</span>

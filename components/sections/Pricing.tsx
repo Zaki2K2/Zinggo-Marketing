@@ -25,7 +25,7 @@ const PLANS: Plan[] = [
 
 export function Pricing() {
   return (
-    <section id="pricing" aria-labelledby="pricing-title" className="on-light relative -mt-10 rounded-t-[40px] bg-mist py-24 sm:py-32">
+    <section id="pricing" aria-labelledby="pricing-title" className="on-light relative -mt-10 rounded-t-[40px] bg-aqua py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal className="grid gap-4 lg:grid-cols-[1fr_0.6fr] lg:items-end">
           <div>

@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from 'react';
 import { useDemo, usePresence } from '@/components/demo/DemoProvider';
+import { ProductPhoto } from '@/components/demo/ProductPhoto';
 import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { BUCKET_LABELS, INITIAL_STOCK, LOW_STOCK_AT, METHODS, PRODUCTS } from '@/lib/demo/data';
@@ -92,7 +93,7 @@ export function OpsBoard() {
                 ) : (
                   <ul className="space-y-2.5 text-[14px]">
                     {lines.map((l) => (
-                      <li key={l.id} className="flex justify-between"><span><b className="font-extrabold">{l.qty} ×</b> {l.name}</span><span className="font-bold">{rs(l.qty * l.price)}</span></li>
+                      <li key={l.id} className="flex items-center justify-between gap-3"><span className="flex min-w-0 items-center gap-2.5">{PRODUCTS.find((x) => x.id === l.id) && <ProductPhoto p={PRODUCTS.find((x) => x.id === l.id)!} className="h-8 w-8 shrink-0 rounded-lg" />}<span className="truncate"><b className="font-extrabold">{l.qty} ×</b> {l.name}</span></span><span className="font-bold">{rs(l.qty * l.price)}</span></li>
                     ))}
                   </ul>
                 )}
@@ -113,7 +114,7 @@ export function OpsBoard() {
                     const low = n <= LOW_STOCK_AT;
                     return (
                       <li key={p.id} className="flex items-center justify-between text-[14px]">
-                        <span className="font-semibold">{p.name}</span>
+                        <span className="flex items-center gap-2.5 font-semibold"><ProductPhoto p={p} className="h-7 w-7 rounded-lg" />{p.name}</span>
                         <span className="flex items-center gap-2">
                           {sold > 0 && <span className="pop-in text-[12px] font-bold text-danger">−{sold}</span>}
                           <span className={`w-8 text-right text-[16px] font-extrabold ${low ? 'text-danger' : ''}`}><Num v={n} /></span>

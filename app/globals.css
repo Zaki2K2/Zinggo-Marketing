@@ -2,18 +2,21 @@
 
 /* ───────── Design tokens (Tailwind v4 @theme) ───────── */
 @theme {
-  --color-brand: #00c7be;
+  --color-brand: #00ccc0;
   --color-brand-ink: #00706b; /* teal safe for text on light surfaces (>=4.5:1) */
   --color-brand-soft: #e6f9f8;
-  --color-night: #0a081b;
-  --color-deep: #071b1b;
+  --color-night: #003836; /* deep teal: hero, feature stack */
+  --color-deep: #000000; /* black: solutions, footer, dark text on teal */
   --color-paper: #f5f5f5;
-  --color-mist: #f3f5f4;
+  --color-aqua: #acece8; /* soft teal tint: pricing */
+  --color-cream: #ffeeb6; /* soft yellow tint */
+  --color-sage: #75acaa; /* muted teal */
+  --color-mist: #f5f5f5;
   --color-ink: #111716;
   --color-muted: #5a6563;
   --color-line: #e5eae8;
   --color-neon: #c6ff33;
-  --color-amber: #ffd84d;
+  --color-amber: #ffd64d;
   --color-sun: #ffd64d; /* headline accent word */
   --color-danger: #c62a2a;
 
@@ -46,10 +49,11 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 /* ───────── Buttons ───────── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-weight: 700; padding: 15px 28px; font-size: 16px; line-height: 1; white-space: nowrap; cursor: pointer; transition: transform 0.16s var(--ease-micro), background-color 0.16s var(--ease-micro), box-shadow 0.16s var(--ease-micro), color 0.16s; }
 .btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--color-brand); color: var(--color-deep); }
-.btn-primary:hover { background: #19d8cf; }
+/* Start Free Trial: solid brand teal, white bold label, softly rounded (matches the app's "Daily opening" button). */
+.btn-primary { background: var(--color-brand); color: #fff; border: 0; border-radius: 14px; }
+.btn-primary:hover { background: #00b8ad; }
 .btn-dark { background: var(--color-deep); color: #fff; }
-.btn-dark:hover { background: #0d2a2a; }
+.btn-dark:hover { background: #003836; }
 .btn-ghost { color: #fff; border: 1.5px solid rgb(255 255 255 / 0.28); }
 .btn-ghost:hover { background: rgb(255 255 255 / 0.08); }
 .btn-sm { padding: 11px 20px; font-size: 14px; }
@@ -113,7 +117,7 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 @media (max-height: 680px) { .demo-box { --s: 0.76; } }
 @media (max-width: 1023px) { .demo-box { --s: 1; } }
 @media (max-width: 359px) { .demo-box { --s: 0.9; } }
-.demo-cursor { position: absolute; left: 0; top: 0; z-index: 60; width: 36px; height: 36px; border-radius: 999px; pointer-events: none; background: rgb(0 199 190 / 0.28); border: 2px solid var(--color-brand); transition: transform 0.55s var(--ease-panel); box-shadow: 0 6px 18px -6px rgb(0 0 0 / 0.5); }
+.demo-cursor { position: absolute; left: 0; top: 0; z-index: 60; width: 36px; height: 36px; border-radius: 999px; pointer-events: none; background: rgb(0 204 192 / 0.28); border: 2px solid var(--color-brand); transition: transform 0.55s var(--ease-panel); box-shadow: 0 6px 18px -6px rgb(0 0 0 / 0.5); }
 .demo-ripple { position: absolute; inset: -6px; border-radius: 999px; border: 2px solid var(--color-brand); opacity: 0; animation: cursor-ripple 0.7s ease-out 0.5s both; }
 @keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .grow-x { transform-origin: left; animation: grow-x 0.8s var(--ease-panel) both; animation-delay: var(--d, 0ms); }
@@ -138,7 +142,7 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 .swap-out { animation: fade-out 0.3s var(--ease-micro) forwards; animation-delay: var(--d, 0ms); }
 .swap-in { opacity: 0; animation: fade-in 0.3s var(--ease-micro) forwards; animation-delay: var(--d, 0ms); }
 
-.tap { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 999px; border: 2px solid var(--color-brand); background: rgb(0 199 190 / 0.35); opacity: 0; pointer-events: none; z-index: 40; animation: tap-ring 0.9s ease-out both; animation-delay: var(--d, 0ms); }
+.tap { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 999px; border: 2px solid var(--color-brand); background: rgb(0 204 192 / 0.35); opacity: 0; pointer-events: none; z-index: 40; animation: tap-ring 0.9s ease-out both; animation-delay: var(--d, 0ms); }
 
 /* Pause scripted demo animations when the sequence is paused */
 [data-paused="true"], [data-paused="true"] * { animation-play-state: paused !important; }
@@ -162,3 +166,6 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 .phone-intro img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; user-select: none; pointer-events: none; }
 .phone-intro-fallback { color: #fff; font-size: 46px; font-weight: 800; letter-spacing: -0.05em; }
 @media (prefers-reduced-motion: reduce) { .phone-intro { display: none; } }
+
+/* The official Zinggo wordmark (white PNG, used as an alpha mask) filled with the headline accent colour. */
+.zg-word { display: inline-block; height: 0.98em; aspect-ratio: 983 / 294; vertical-align: -0.27em; margin-inline: 0.02em -0.03em; background: var(--color-sun); -webkit-mask: url(/brand/logo-zinggo.png) center / contain no-repeat; mask: url(/brand/logo-zinggo.png) center / contain no-repeat; }

@@ -21,7 +21,11 @@ export function Swap({ from, to, delay, className = '' }: { from: ReactNode; to:
   );
 }
 
-export function Thumb({ letter, tone }: { letter: string; tone: string }) {
+export function Thumb({ letter, tone, src }: { letter: string; tone: string; src?: string }) {
+  if (src) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt="" width={480} height={480} decoding="async" draggable={false} className="h-9 w-9 shrink-0 rounded-xl object-cover" />;
+  }
   return (
     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl text-[13px] font-extrabold text-white" style={{ background: tone }}>
       {letter}

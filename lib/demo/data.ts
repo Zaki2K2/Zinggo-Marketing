@@ -1,7 +1,7 @@
 import type { DemoState, Method, Product, Sale } from './types';
 
 /** Fictional demo catalogue. */
-export const PRODUCTS: Product[] = [
+const RAW: Omit<Product, 'image'>[] = [
   { id: 'biryani', name: 'Chicken Biryani', price: 450, unit: 'plate', category: 'Main Course', tone: '#e8890c' },
   { id: 'burger', name: 'Zinger Burger', price: 550, unit: 'each', category: 'Main Course', tone: '#c0392b' },
   { id: 'pasta', name: 'Red Sauce Pasta', price: 200, unit: 'plate', category: 'Main Course', tone: '#d9531e' },
@@ -9,6 +9,8 @@ export const PRODUCTS: Product[] = [
   { id: 'lemonade', name: 'Mint Lemonade', price: 200, unit: '250 ml', category: 'Drinks', tone: '#1aa37a' },
   { id: 'fries', name: 'Masala Fries', price: 250, unit: 'each', category: 'Starters', tone: '#6d5bd0' },
 ];
+
+export const PRODUCTS: Product[] = RAW.map((p) => ({ ...p, image: `/products/${p.id}.jpg` }));
 
 export const CATEGORIES = ['All', 'Main Course', 'Soups', 'Drinks', 'Starters'] as const;
 export const LOW_STOCK_AT = 5;
