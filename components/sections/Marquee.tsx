@@ -24,7 +24,7 @@ export function Marquee() {
   return (
     <section id="box" aria-labelledby="box-title" className="marquee relative -mt-10 overflow-hidden rounded-t-[40px] bg-sun py-24 sm:py-32">
       <Reveal className="mx-auto mb-14 max-w-7xl px-5 sm:px-8">
-        <p className="t-eyebrow text-white">Everything in the box</p>
+        <p className="t-eyebrow text-night">Everything in the box</p>
         <h2 id="box-title" className="t-section mt-4 max-w-3xl text-white">The small things that run a <span className="text-brand">business.</span></h2>
       </Reveal>
       <div className="space-y-2">

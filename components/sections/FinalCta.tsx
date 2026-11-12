@@ -30,7 +30,7 @@ export function FinalCta() {
 
       <Reveal className="relative z-10 mx-auto max-w-4xl px-5 text-center">
         <p className="t-eyebrow text-night/75">Ready when you are</p>
-        <h2 id="cta-title" className="mt-5 text-[clamp(40px,6.4vw,104px)] font-extrabold leading-[0.94] tracking-[-0.055em]">Your business.<br />Your future.<br />Your Zinggo.</h2>
+        <h2 id="cta-title" className="mt-5 text-[clamp(40px,6.4vw,104px)] font-extrabold leading-[0.94] tracking-[-0.055em]">Your business.<br />Your future.<br />Your <span className="sr-only">Zinggo</span><span className="zg-word" style={{ background: 'var(--color-night)' }} aria-hidden="true" />.</h2>
         <p className="t-body mx-auto mt-7 max-w-md text-night/85">Sell smarter, manage better, and take your business forward with one connected platform.</p>
         <a href={trialHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-10 px-10 py-5 text-[17px] !bg-sun !text-night hover:!bg-[#f0c53f]">Start Free Trial <Icon name="arrow" size={20} strokeWidth={2.4} /></a>
         <p className="mt-6 text-[14px] font-medium text-night/80">Already a merchant? Sign in from the Zinggo Merchant app on your phone.</p>
