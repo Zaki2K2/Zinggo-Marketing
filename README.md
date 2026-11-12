@@ -37,6 +37,10 @@ npm run lint       # type-check (tsc --noEmit)
 - **Privacy Policy / Terms** open a pre-filled email request. Set `url` in `LEGAL_LINKS` when pages exist.
 - No app-store links are included because the URLs were not provided.
 
+## Brand assets
+
+Official sources live in `brand-src/` (`Logo-Zinggo.png`, `Zinggo-Icon-white.png`, white on transparent) and are never modified. `npm run brand:icons` regenerates every derivative from them: the cropped wordmark (`public/brand/logo-zinggo.png`), `favicon.ico` (16/32/48), the PNG favicons, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and the maskable icon, all on the brand colour `#00CCC0`. Icons are declared in `app/layout.tsx` and the web app manifest is `app/manifest.ts`.
+
 ## The live demo
 
 A self-contained simulation: typed data, a reducer-based transaction state machine (no overselling, no empty checkout, no sale without a payment method) and a deterministic script. Nothing is sent anywhere and no real merchant or customer data is used. Autoplay pauses on the first touch and never resumes by itself; Replay or Play restarts from a clean state.

@@ -19,7 +19,7 @@ export function Hero() {
           <p className="fade-in label mb-5 text-white/55" style={d(100)}>Business platform for merchants in Pakistan</p>
           <h1 id="hero-title" className="text-[clamp(40px,5.2vw,82px)] font-extrabold leading-[0.96] tracking-[-0.055em]">
             <span className="line-mask"><span style={d(180)}>Run your business.</span></span>
-            <span className="line-mask"><span style={d(300)}>All in <span className="text-brand">Zinggo.</span></span></span>
+            <span className="line-mask"><span style={d(300)}>All in <span className="text-sun">Zinggo.</span></span></span>
           </h1>
           <p className="slide-up mt-6 hidden max-w-[36ch] sm:block text-[clamp(16px,1.35vw,19px)] leading-relaxed text-white/65" style={d(480)}>Sales, stock, orders and customers, running together. Try the real workflow in the app beside you.</p>
 

@@ -1,14 +1,21 @@
-export function Logo({ className = '', tone = 'light' }: { className?: string; tone?: 'light' | 'dark' }) {
-  const color = tone === 'light' ? '#ffffff' : '#071B1B';
+import Image from 'next/image';
+
+/**
+ * Official Zinggo wordmark (white, transparent), cropped to its artwork from brand-src/Logo-Zinggo.png.
+ * 983x294 source; shown at a fixed height so the ratio is never distorted and it stays sharp on retina screens.
+ * It is white, so use it on dark or brand-coloured surfaces.
+ */
+export function Logo({ className = '' }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
-      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="16" fill="#00C7BE" />
-        <path d="M18 20h28L18 44h28" fill="none" stroke="#071B1B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span style={{ color }} className="text-[22px] font-extrabold tracking-[-0.04em]">
-        zinggo
-      </span>
-    </span>
+    <Image
+      src="/brand/logo-zinggo.png"
+      alt="Zinggo"
+      width={983}
+      height={294}
+      quality={92}
+      sizes="120px"
+      priority
+      className={`h-[26px] w-auto select-none sm:h-[30px] ${className}`}
+    />
   );
 }

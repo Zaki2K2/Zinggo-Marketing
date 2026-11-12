@@ -14,6 +14,7 @@
   --color-line: #e5eae8;
   --color-neon: #c6ff33;
   --color-amber: #ffd84d;
+  --color-sun: #ffd64d; /* headline accent word */
   --color-danger: #c62a2a;
 
   --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
@@ -45,7 +46,7 @@ body { font-family: var(--font-sans); color: var(--color-ink); background: #fff;
 /* ───────── Buttons ───────── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-weight: 700; padding: 15px 28px; font-size: 16px; line-height: 1; white-space: nowrap; cursor: pointer; transition: transform 0.16s var(--ease-micro), background-color 0.16s var(--ease-micro), box-shadow 0.16s var(--ease-micro), color 0.16s; }
 .btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--color-brand); color: var(--color-deep); box-shadow: 0 10px 30px -10px rgb(0 199 190 / 0.7); }
+.btn-primary { background: var(--color-brand); color: var(--color-deep); }
 .btn-primary:hover { background: #19d8cf; }
 .btn-dark { background: var(--color-deep); color: #fff; }
 .btn-dark:hover { background: #0d2a2a; }
