@@ -10,9 +10,9 @@ function Row({ words, dir }: { words: string[]; dir: 'l' | 'r' }) {
     <div className="overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_9%,#000_91%,transparent)]" aria-hidden="true">
       <div className={dir === 'l' ? 'marquee-l' : 'marquee-r'}>
         {loop.map((w, i) => (
-          <span key={i} className={`mx-6 whitespace-nowrap text-[clamp(40px,7vw,104px)] font-extrabold leading-[1.1] tracking-[-0.045em] ${['text-white', 'text-sun', 'text-outline text-aqua'][(i + (dir === 'r' ? 1 : 0)) % 3]}`}>
+          <span key={i} className={`mx-6 whitespace-nowrap text-[clamp(40px,7vw,104px)] font-extrabold leading-[1.1] tracking-[-0.045em] ${['text-white', 'text-brand', 'text-outline text-white'][(i + (dir === 'r' ? 1 : 0)) % 3]}`}>
             {w}
-            <span className="mx-6 inline-block h-3 w-3 rounded-full bg-sun align-middle" />
+            <span className="mx-6 inline-block h-3 w-3 rounded-full bg-white align-middle" />
           </span>
         ))}
       </div>
@@ -22,17 +22,17 @@ function Row({ words, dir }: { words: string[]; dir: 'l' | 'r' }) {
 
 export function Marquee() {
   return (
-    <section id="box" aria-labelledby="box-title" className="marquee relative -mt-10 overflow-hidden rounded-t-[40px] bg-night py-24 sm:py-32">
+    <section id="box" aria-labelledby="box-title" className="marquee relative -mt-10 overflow-hidden rounded-t-[40px] bg-sun py-24 sm:py-32">
       <Reveal className="mx-auto mb-14 max-w-7xl px-5 sm:px-8">
-        <p className="t-eyebrow text-brand">Everything in the box</p>
-        <h2 id="box-title" className="t-section mt-4 max-w-3xl text-white">The small things that run a <span className="text-sun">business.</span></h2>
+        <p className="t-eyebrow text-white">Everything in the box</p>
+        <h2 id="box-title" className="t-section mt-4 max-w-3xl text-white">The small things that run a <span className="text-brand">business.</span></h2>
       </Reveal>
       <div className="space-y-2">
         <Row words={ROW_A} dir="l" />
         <Row words={ROW_B} dir="r" />
       </div>
       <Reveal className="mx-auto mt-14 max-w-7xl px-5 sm:px-8">
-        <p className="max-w-xl border-t border-white/20 pt-6 text-[15px] leading-relaxed text-white/70">Payments are recorded, not processed. Zinggo notes cash, Easypaisa, JazzCash and bank payment references against each sale. It is not a bank, wallet or payment gateway.</p>
+        <p className="max-w-xl border-t border-white/50 pt-6 text-[15px] leading-relaxed text-white">Payments are recorded, not processed. Zinggo notes cash, Easypaisa, JazzCash and bank payment references against each sale. It is not a bank, wallet or payment gateway.</p>
       </Reveal>
       <ul className="sr-only">{[...ROW_A, ...ROW_B].map((w) => <li key={w}>{w}</li>)}</ul>
     </section>
